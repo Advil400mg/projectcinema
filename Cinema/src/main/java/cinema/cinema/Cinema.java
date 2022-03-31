@@ -17,6 +17,6 @@ public class Cinema {
 
     public static void main(String[] args) {
         Date date = Date.valueOf("2000-12-15");
-        sql.insert_user("Momo", "la truire", date, "ouho", false);
+        sql.insert_user("Momo", "la truire","gobelin@amassue.com", date, "ouho", false);
     }
 }

@@ -29,20 +29,21 @@ public class SQLqry {
         password = "";
     }
     
-    public void insert_user(String name, String surname, Date dateofbirth,String user_password, boolean isEmployee )
+    public void insert_user(String name, String surname,String mail, Date dateofbirth,String user_password, boolean isEmployee )
     {
         try
         {
             Class.forName(driver);
             
             Connection con = DriverManager.getConnection(url, username, password);
-            String qry = "INSERT INTO user VALUES (UUID(), ?,?,?,?,?)";
+            String qry = "INSERT INTO user VALUES (UUID(), ?,?,?,?,?,?)";
             PreparedStatement st = con.prepareStatement(qry);
             st.setString(1,name);
             st.setString(2,surname);
-            st.setDate(3,dateofbirth);
-            st.setString(4, user_password);
-            st.setBoolean(5, isEmployee);                    
+            st.setString(3,mail);
+            st.setDate(4,dateofbirth);
+            st.setString(5, user_password);
+            st.setBoolean(6, isEmployee);                    
             
             st.executeUpdate();        
         }
