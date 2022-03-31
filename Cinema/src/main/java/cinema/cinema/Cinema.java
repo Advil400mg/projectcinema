@@ -4,7 +4,7 @@
  */
 
 package cinema.cinema;
-import sql.SQLqry;
+import sql.User;
 import java.sql.Date;
 
 
@@ -13,10 +13,27 @@ import java.sql.Date;
  * @author Tanguy
  */
 public class Cinema {
-    static SQLqry sql = new SQLqry();
+    static User sql = new User();
 
     public static void main(String[] args) {
-        Date date = Date.valueOf("2000-12-15");
-        sql.insert_user("Momo", "la truire","gobelin@amassue.com", date, "ouho", false);
+        /*Date date = Date.valueOf("2000-12-15");
+        sql.insert("Momo", "la truire","gobelin@amassue.com", date, "ouho", false);*/
+        if(sql.isRegistered("gobelin@amassue.com"))
+        {
+            System.out.println("Il existe");
+        }
+        else
+        {
+            System.out.println("Existe pas");
+        }
+        
+        if(sql.isConnected("gobelin@amassue.com", "ouho"))
+        {
+            System.out.println("Connecté");
+        }
+        else
+        {
+            System.out.println("Pas connecté");
+        }
     }
 }

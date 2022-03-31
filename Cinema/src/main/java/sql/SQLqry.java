@@ -4,22 +4,16 @@
  */
 package sql;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
 /**
  *
  * @author Tanguy
  */
 public class SQLqry {
-    String driver;
-    String url;
-    String username;
-    String password;
+    protected String driver;
+    protected String url;
+    protected String username;
+    protected String password;
     
     public SQLqry()
     {
@@ -27,33 +21,5 @@ public class SQLqry {
         url = "jdbc:mysql://localhost:3306/cinema";
         username = "root";
         password = "";
-    }
-    
-    public void insert_user(String name, String surname,String mail, Date dateofbirth,String user_password, boolean isEmployee )
-    {
-        try
-        {
-            Class.forName(driver);
-            
-            Connection con = DriverManager.getConnection(url, username, password);
-            String qry = "INSERT INTO user VALUES (UUID(), ?,?,?,?,?,?)";
-            PreparedStatement st = con.prepareStatement(qry);
-            st.setString(1,name);
-            st.setString(2,surname);
-            st.setString(3,mail);
-            st.setDate(4,dateofbirth);
-            st.setString(5, user_password);
-            st.setBoolean(6, isEmployee);                    
-            
-            st.executeUpdate();        
-        }
-        catch(SQLException e)
-        {
-            e.printStackTrace();
-        }
-        catch(Exception e)
-        {
-            System.out.println("ptn " + e.getMessage());
-        }
     }
 }
