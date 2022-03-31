@@ -40,7 +40,7 @@ public class Cinema {
         }
         
         try {
-            sql.verifyAdress("tanguy.vienot.pers@gmail.com");
+            sql.verifyAddress("tanguy.vienot.pers@gmail.com");
         } catch (MessagingException ex) {
             Logger.getLogger(Cinema.class.getName()).log(Level.SEVERE, null, ex);
         }
