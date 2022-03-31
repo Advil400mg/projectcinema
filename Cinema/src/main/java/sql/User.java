@@ -122,7 +122,7 @@ public class User extends SQLqry{
         return exists;
     }
     
-    public void verifyAdress(String mail_address) throws MessagingException
+    public void verifyAddress(String mail_address) throws MessagingException
     {
         Properties properties = new Properties();
         Random r = new Random();
