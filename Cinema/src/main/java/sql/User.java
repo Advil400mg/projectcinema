@@ -22,6 +22,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Tanguy
@@ -122,7 +123,7 @@ public class User extends SQLqry{
         return exists;
     }
     
-    public void verifyAddress(String mail_address) throws MessagingException
+    public boolean verifyAddress(String mail_address) throws MessagingException
     {
         Properties properties = new Properties();
         Random r = new Random();
@@ -160,6 +161,14 @@ public class User extends SQLqry{
         
         Transport.send(message);
         System.out.println("Message envoyé");
+        
+        String value = JOptionPane.showInputDialog("Code envoyé par mail");
+        if(!(value == null ? code == null : value.equals(code)))
+        {
+        } else {
+            return true;
+        }
+        return false;
         
 
     }
