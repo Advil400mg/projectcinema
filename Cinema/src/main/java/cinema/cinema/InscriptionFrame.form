@@ -23,23 +23,24 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="1740" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="1642" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="PanelFirstBackground1" max="32767" attributes="0"/>
+                  <Component id="PanelFirstBackground1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="2638" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="1189" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="PanelFirstBackground1" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="1313" max="-2" attributes="0"/>
+                  <Component id="PanelFirstBackground1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -69,7 +70,7 @@
                           <Component id="PanelSecondBackground1" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="151" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -83,7 +84,7 @@
                       <Component id="jSeparatorCinemaName1" min="-2" pref="22" max="-2" attributes="0"/>
                       <Component id="PanelSecondBackground1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="128" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -111,73 +112,61 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabelSurname" min="-2" pref="359" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jTextMail" pref="990" max="32767" attributes="0"/>
-                                      <Component id="jTextSurname" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jTextName" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jTextBirthDate" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jTextPassword" alignment="0" max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabelMail" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
-                                          <Component id="jLabelBirth" min="-2" pref="359" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabelName" min="-2" pref="175" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="229" max="-2" attributes="0"/>
-                                              <Component id="jButtonCreate" min="-2" pref="204" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                  </Group>
-                                  <Component id="jLabelPassword1" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
-                              </Group>
+                          <Component id="jLabelMail" min="-2" pref="175" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jTextName" alignment="0" pref="982" max="32767" attributes="0"/>
+                              <Component id="jLabelName" min="-2" pref="175" max="-2" attributes="0"/>
+                              <Component id="jLabelSurname" alignment="0" min="-2" pref="359" max="-2" attributes="0"/>
+                              <Component id="jTextSurname" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="705" max="-2" attributes="0"/>
-                              <Component id="jButtonCancel" min="-2" pref="204" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jTextMail" alignment="0" min="-2" pref="990" max="-2" attributes="0"/>
+                          <Component id="jLabelBirth" alignment="0" min="-2" pref="359" max="-2" attributes="0"/>
+                          <Component id="jTextBirthDate" alignment="0" min="-2" pref="990" max="-2" attributes="0"/>
+                          <Component id="jLabelPassword1" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
+                          <Component id="jTextPassword" alignment="0" min="-2" pref="990" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="131" max="32767" attributes="0"/>
+                      <EmptySpace pref="99" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jButtonCreate" min="-2" pref="204" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
+                      <Component id="jButtonCancel" min="-2" pref="204" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="329" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
-                              <Component id="jLabelName" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButtonCreate" min="-2" pref="81" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jTextName" min="-2" pref="66" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jLabelSurname" min="-2" pref="46" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                      <Component id="jLabelName" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextSurname" min="-2" pref="66" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                      <Component id="jTextName" min="-2" pref="48" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jLabelSurname" min="-2" pref="46" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                      <Component id="jTextSurname" min="-2" pref="52" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="jLabelMail" min="-2" pref="42" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextMail" min="-2" pref="66" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                      <Component id="jTextMail" min="-2" pref="52" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="jLabelBirth" min="-2" pref="46" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextBirthDate" min="-2" pref="66" max="-2" attributes="0"/>
+                      <Component id="jTextBirthDate" min="-2" pref="54" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                       <Component id="jLabelPassword1" min="-2" pref="41" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextPassword" min="-2" pref="66" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
-                      <Component id="jButtonCancel" min="-2" pref="80" max="-2" attributes="0"/>
-                      <EmptySpace pref="115" max="32767" attributes="0"/>
+                      <Component id="jTextPassword" min="-2" pref="55" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jButtonCancel" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
+                          <Component id="jButtonCreate" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="66" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
