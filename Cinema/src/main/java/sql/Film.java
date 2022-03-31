@@ -32,7 +32,7 @@ public class Film extends SQLqry{
             st.setString(2,genre);
             st.setInt(3,duration);
             st.setString(4,imagepath);
-                  
+            
             
             st.executeUpdate();        
         }

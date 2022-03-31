@@ -3,6 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package cinema.cinema;
+import java.sql.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
+import sql.User;
 
 /**
  *
@@ -43,7 +48,7 @@ public class InscriptionFrame extends javax.swing.JFrame {
         jTextPassword = new javax.swing.JTextField();
         jSeparatorCinemaName1 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         PanelFirstBackground1.setBackground(new java.awt.Color(54, 33, 89));
 
@@ -134,27 +139,34 @@ public class InscriptionFrame extends javax.swing.JFrame {
                         .addGroup(PanelSecondBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(PanelSecondBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabelBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabelMail, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jTextMail, javax.swing.GroupLayout.DEFAULT_SIZE, 990, Short.MAX_VALUE)
                                 .addComponent(jTextSurname)
                                 .addComponent(jTextName)
                                 .addComponent(jTextBirthDate)
-                                .addComponent(jTextPassword))
+                                .addComponent(jTextPassword)
+                                .addGroup(PanelSecondBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelMail, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(PanelSecondBackground1Layout.createSequentialGroup()
+                                        .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(229, 229, 229)
+                                        .addComponent(jButtonCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jLabelPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(PanelSecondBackground1Layout.createSequentialGroup()
-                        .addGap(285, 285, 285)
-                        .addComponent(jButtonCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(216, 216, 216)
+                        .addGap(705, 705, 705)
                         .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(131, Short.MAX_VALUE))
         );
         PanelSecondBackground1Layout.setVerticalGroup(
             PanelSecondBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelSecondBackground1Layout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(jLabelName)
+                .addGroup(PanelSecondBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelSecondBackground1Layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(jLabelName))
+                    .addGroup(PanelSecondBackground1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButtonCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jTextName, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -174,10 +186,8 @@ public class InscriptionFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66)
-                .addGroup(PanelSecondBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(115, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout PanelFirstBackground1Layout = new javax.swing.GroupLayout(PanelFirstBackground1);
@@ -241,6 +251,37 @@ public class InscriptionFrame extends javax.swing.JFrame {
 
     private void jButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateActionPerformed
         // TODO add your handling code here:
+        User user = new User();
+        String name = jTextName.getText();
+        String surname = jTextSurname.getText();
+        String mail = jTextMail.getText();
+        Date date = null;
+        try
+        {
+            date = Date.valueOf(jTextBirthDate.getText());
+        }
+        catch(Exception e)
+        {
+            date = null;
+        }
+        String password = jTextPassword.getText();
+        boolean isEmployee = false;
+        
+        boolean ok = false;
+        if(user.isRegistered(mail))return;
+        try {
+            ok = user.verifyAddress(mail);
+        } catch (MessagingException ex) {
+            Logger.getLogger(InscriptionFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        if(ok & !name.isEmpty() & !surname.isEmpty() & date!=null & !password.isEmpty())
+        {
+            user.insert(name, surname, mail, date, password, isEmployee);
+            this.dispose();
+        }
+        
     }//GEN-LAST:event_jButtonCreateActionPerformed
 
     private void jTextMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextMailActionPerformed

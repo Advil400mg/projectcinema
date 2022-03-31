@@ -4,6 +4,7 @@
  */
 
 package cinema.cinema;
+import sql.User;
 
 /**
  *
@@ -80,6 +81,11 @@ public class LoginFrame extends javax.swing.JFrame {
         jButtonSignUp.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jButtonSignUp.setForeground(new java.awt.Color(102, 102, 102));
         jButtonSignUp.setText("Sign Up");
+        jButtonSignUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSignUpActionPerformed(evt);
+            }
+        });
 
         jPasswordField1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
@@ -182,11 +188,27 @@ public class LoginFrame extends javax.swing.JFrame {
 
     private void jButtonSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSignInActionPerformed
         // TODO add your handling code here:
+        User user = new User();
+        String email = jTextPassword.getText();
+        char[] charpassword = jPasswordField1.getPassword();
+        String password = String.valueOf(charpassword);
+        System.out.println(email + " " + password);
+        if(user.isConnected(email, password))
+        {
+            System.out.println("Connecté");
+        }
     }//GEN-LAST:event_jButtonSignInActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField1ActionPerformed
+
+    private void jButtonSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSignUpActionPerformed
+        // TODO add your handling code here:
+        InscriptionFrame inscription = new InscriptionFrame();
+        inscription.setVisible(true);
+                
+    }//GEN-LAST:event_jButtonSignUpActionPerformed
 
     /**
      * @param args the command line arguments
