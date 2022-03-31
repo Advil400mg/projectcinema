@@ -135,7 +135,7 @@ public class InscriptionFrame extends javax.swing.JFrame {
             .addGroup(PanelSecondBackground1Layout.createSequentialGroup()
                 .addGap(97, 97, 97)
                 .addGroup(PanelSecondBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< HEAD
+
                     .addGroup(PanelSecondBackground1Layout.createSequentialGroup()
                         .addGap(113, 113, 113)
                         .addGroup(PanelSecondBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,7 +158,7 @@ public class InscriptionFrame extends javax.swing.JFrame {
                         .addGap(705, 705, 705)
                         .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(131, Short.MAX_VALUE))
-=======
+
                     .addComponent(jLabelMail, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(PanelSecondBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jTextName, javax.swing.GroupLayout.DEFAULT_SIZE, 982, Short.MAX_VALUE)
@@ -177,12 +177,11 @@ public class InscriptionFrame extends javax.swing.JFrame {
                 .addGap(149, 149, 149)
                 .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(329, 329, 329))
->>>>>>> romane
         );
         PanelSecondBackground1Layout.setVerticalGroup(
             PanelSecondBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelSecondBackground1Layout.createSequentialGroup()
-<<<<<<< HEAD
+
                 .addGroup(PanelSecondBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelSecondBackground1Layout.createSequentialGroup()
                         .addGap(86, 86, 86)
@@ -194,10 +193,11 @@ public class InscriptionFrame extends javax.swing.JFrame {
                 .addComponent(jTextName, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-=======
+
                 .addGap(61, 61, 61)
                 .addComponent(jLabelName)
->>>>>>> romane
+
+
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextName, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -215,19 +215,12 @@ public class InscriptionFrame extends javax.swing.JFrame {
                 .addGap(41, 41, 41)
                 .addComponent(jLabelPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-<<<<<<< HEAD
                 .addComponent(jTextPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66)
                 .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(115, Short.MAX_VALUE))
-=======
-                .addComponent(jTextPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
-                .addGroup(PanelSecondBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(66, Short.MAX_VALUE))
->>>>>>> romane
+
+
         );
 
         javax.swing.GroupLayout PanelFirstBackground1Layout = new javax.swing.GroupLayout(PanelFirstBackground1);
