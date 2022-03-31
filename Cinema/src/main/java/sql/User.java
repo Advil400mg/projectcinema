@@ -10,7 +10,18 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.Properties;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 /**
  *
  * @author Tanguy
@@ -109,5 +120,47 @@ public class User extends SQLqry{
         }
         
         return exists;
+    }
+    
+    public void verifyAdress(String mail_address) throws MessagingException
+    {
+        Properties properties = new Properties();
+        Random r = new Random();
+        
+        String code = String.format("%d%d%d%d%d",r.nextInt(10),r.nextInt(10),r.nextInt(10),r.nextInt(10),r.nextInt(10));
+        
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+        properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+        properties.put("mail.smtp.ssl.protocols", "TLSv1.2");
+        
+        String sender = "tanguy.vienot.pers@gmail.com";
+        String sender_password = "lexurxnbmkikslfc";
+        
+        
+        Session session = Session.getInstance(properties, new Authenticator(){
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication()
+            {
+                return new PasswordAuthentication(sender, sender_password);
+            }
+        });
+        
+        Message message = new MimeMessage(session);
+        try {
+            message.setFrom(new InternetAddress(sender));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(mail_address));
+            message.setSubject("Validation code CineGobelin");
+            message.setText("CineGobelin\n" + "Renseignez ce code dans l'application pour valider votre inscription : " + code);
+        } catch (MessagingException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Transport.send(message);
+        System.out.println("Message envoyé");
+        
+
     }
 }

@@ -6,6 +6,9 @@
 package cinema.cinema;
 import sql.User;
 import java.sql.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 
 
 /**
@@ -34,6 +37,12 @@ public class Cinema {
         else
         {
             System.out.println("Pas connecté");
+        }
+        
+        try {
+            sql.verifyAdress("tanguy.vienot.pers@gmail.com");
+        } catch (MessagingException ex) {
+            Logger.getLogger(Cinema.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
