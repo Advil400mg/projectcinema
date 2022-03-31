@@ -4,14 +4,19 @@
  */
 
 package cinema.cinema;
+import sql.SQLqry;
+import java.sql.Date;
+
 
 /**
  *
  * @author Tanguy
  */
 public class Cinema {
+    static SQLqry sql = new SQLqry();
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Date date = Date.valueOf("2000-12-15");
+        sql.insert_user("Momo", "la truire", date, "ouho", false);
     }
 }
