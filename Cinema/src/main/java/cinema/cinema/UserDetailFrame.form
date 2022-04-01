@@ -286,6 +286,8 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLabel1AdminIcon">
+            </Component>
             <Component class="javax.swing.JLabel" name="jLabelUserDetail">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">

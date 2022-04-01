@@ -4,6 +4,8 @@
  */
 package cinema.cinema;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author 33659
@@ -342,10 +344,21 @@ public class UserDetailFrame extends javax.swing.JFrame {
     private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonUpdateActionPerformed
-
+    protected ImageIcon createImageIcon(String path,
+                                               String description) {
+                    java.net.URL imgURL = getClass().getResource(path);
+                    if (imgURL != null) {
+                            return new ImageIcon(imgURL, description);
+                    } else {
+                            System.err.println("Couldn't find file: " + path);
+                            return null;
+                    }
+            }
     /**
      * @param args the command line arguments
      */
+	 
+	
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -383,6 +396,7 @@ public class UserDetailFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonDelete;
     private javax.swing.JButton jButtonUpdate;
     private javax.swing.JCheckBox jCheckBoxUpdate;
+    private javax.swing.JLabel jLabel1AdminIcon;
     private javax.swing.JLabel jLabelBirthDate;
     private javax.swing.JLabel jLabelBirthdate;
     private javax.swing.JLabel jLabelEmail;
@@ -396,8 +410,6 @@ public class UserDetailFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTitleTicket;
     private javax.swing.JLabel jLabelUserDetail;
     private javax.swing.JLabel jLabelisEmployee;
-    private javax.swing.JList<String> jListRecords;
-    private javax.swing.JList<String> jListTickets;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;

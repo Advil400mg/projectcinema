@@ -2,7 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.cinema;
+package cinema.cinema;
+import java.sql.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
+import sql.User;
 
 /**
  *
@@ -43,7 +48,7 @@ public class InscriptionFrame extends javax.swing.JFrame {
         jTextPassword = new javax.swing.JTextField();
         jSeparatorCinemaName1 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         PanelFirstBackground1.setBackground(new java.awt.Color(54, 33, 89));
 
@@ -241,6 +246,37 @@ public class InscriptionFrame extends javax.swing.JFrame {
 
     private void jButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateActionPerformed
         // TODO add your handling code here:
+        User user = new User();
+        String name = jTextName.getText();
+        String surname = jTextSurname.getText();
+        String mail = jTextMail.getText();
+        Date date = null;
+        try
+        {
+            date = Date.valueOf(jTextBirthDate.getText());
+        }
+        catch(Exception e)
+        {
+            date = null;
+        }
+        String password = jTextPassword.getText();
+        boolean isEmployee = false;
+        
+        boolean ok = false;
+        if(user.isRegistered(mail))return;
+        try {
+            ok = user.verifyAddress(mail);
+        } catch (MessagingException ex) {
+            Logger.getLogger(InscriptionFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        if(ok & !name.isEmpty() & !surname.isEmpty() & date!=null & !password.isEmpty())
+        {
+            user.insert(name, surname, mail, date, password, isEmployee);
+            this.dispose();
+        }
+        
     }//GEN-LAST:event_jButtonCreateActionPerformed
 
     private void jTextMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextMailActionPerformed
@@ -280,3 +316,4 @@ public class InscriptionFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextSurname;
     // End of variables declaration//GEN-END:variables
 }
+
