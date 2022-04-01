@@ -210,6 +210,39 @@ public class User extends SQLqry{
         }
     }
     
+    public String getAll(String mail)
+    {
+        String returnValue = "";
+        try
+        {
+            Class.forName(driver);   
+            
+            Connection con = DriverManager.getConnection(url, username, password);
+            String qry = "SELECT * FROM user WHERE mail LIKE ?";
+            PreparedStatement st = con.prepareStatement(qry);
+            st.setString(1, mail);
+            ResultSet rs = st.executeQuery();
+
+            
+            while(rs.next())
+            {
+                returnValue = rs.getString(2) + " " + rs.getString(3) + " "+ rs.getString(4) + " " +  rs.getString(5) + " " + rs.getString(6) + " "+  rs.getString(7);
+                
+            }
+            
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        return returnValue;
+    }
+    
     public boolean verifyAddress(String mail_address) throws MessagingException
     {
         Properties properties = new Properties();

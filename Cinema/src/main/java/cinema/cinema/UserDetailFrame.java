@@ -5,6 +5,7 @@
 package cinema.cinema;
 
 import javax.swing.ImageIcon;
+import sql.User;
 
 /**
  *
@@ -12,11 +13,22 @@ import javax.swing.ImageIcon;
  */
 public class UserDetailFrame extends javax.swing.JFrame {
 
+
     /**
      * Creates new form UserDetailFrame
      */
-    public UserDetailFrame() {
+    public UserDetailFrame(String mail) {
+        User user = new User();
         initComponents();
+        String allvalues = user.getAll(mail);
+        String[] values = allvalues.split(" ");
+        jLabelName.setText(values[0]);
+        jLabelSurname.setText(values[1]);
+        jLabelBirthdate.setText(values[2]);
+        jLabelEmail.setText(values[3]);
+        jLabelPassword.setText(values[4]);
+        jLabelisEmployee.setText(values[5]);
+        
     }
 
     /**
