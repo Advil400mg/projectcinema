@@ -32,7 +32,6 @@ public class AddSessionFrame extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jLabelAdmin = new javax.swing.JLabel();
         jLabelStartTime = new javax.swing.JLabel();
         jTextFieldStartTime = new javax.swing.JTextField();
         jLabelEndTime = new javax.swing.JLabel();
@@ -87,16 +86,12 @@ public class AddSessionFrame extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(204, 204, 204));
         jLabel5.setText("Add Session");
 
-        jLabelAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cinema/cinema/Icon/icons8-admin-64.png"))); // NOI18N
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addComponent(jLabelAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
                 .addComponent(jLabel5)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -104,9 +99,7 @@ public class AddSessionFrame extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                .addComponent(jLabel5)
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
@@ -128,10 +121,8 @@ public class AddSessionFrame extends javax.swing.JFrame {
 
         jTextFieldDate.setText("____-__-__");
 
-        jButtonAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cinema/cinema/Icon/icons8-ajouter-24.png"))); // NOI18N
         jButtonAdd.setText("Add");
 
-        jButtonQuit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cinema/cinema/Icon/icons8-déconnexion-30.png"))); // NOI18N
         jButtonQuit.setText("Quit");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -155,7 +146,7 @@ public class AddSessionFrame extends javax.swing.JFrame {
                         .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44)
                         .addComponent(jButtonQuit, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(62, 62, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,7 +187,9 @@ public class AddSessionFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
@@ -243,7 +236,6 @@ public class AddSessionFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAdd;
     private javax.swing.JButton jButtonQuit;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabelAdmin;
     private javax.swing.JLabel jLabelDate;
     private javax.swing.JLabel jLabelEndTime;
     private javax.swing.JLabel jLabelRoom;
