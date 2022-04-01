@@ -185,12 +185,11 @@ public class LoginFrame extends javax.swing.JFrame {
 
     private void jTextPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextPasswordActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextPasswordActionPerformed
 
     private void jButtonSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSignInActionPerformed
         // TODO add your handling code here:
-        UserDetailFrame frm = new UserDetailFrame();
-        frm.setVisible(true);
         User user = new User();
         String email = jTextPassword.getText();
         char[] charpassword = jPasswordField1.getPassword();
@@ -213,9 +212,6 @@ public class LoginFrame extends javax.swing.JFrame {
                 
     }//GEN-LAST:event_jButtonSignUpActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

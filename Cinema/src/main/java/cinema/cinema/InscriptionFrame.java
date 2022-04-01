@@ -291,9 +291,6 @@ public class InscriptionFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextPasswordActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     
     
 

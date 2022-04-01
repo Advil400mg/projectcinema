@@ -8,7 +8,9 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -45,4 +47,38 @@ public class Film extends SQLqry{
             System.out.println(e.getMessage());
         }
     }
+    
+    public void loadFilmIntoList(javax.swing.JList<String> list)
+    {
+        DefaultListModel m = new DefaultListModel();
+        try
+        {
+            Class.forName(driver);   
+            
+            Connection con = DriverManager.getConnection(url, username, password);
+            String qry = "SELECT name FROM film";
+            PreparedStatement st = con.prepareStatement(qry);
+            ResultSet rs = st.executeQuery();
+
+            
+            while(rs.next())
+            {
+                String info = rs.getString(1);
+                m.addElement(info);
+                
+            }
+            list.setModel(m);
+            
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    
 }

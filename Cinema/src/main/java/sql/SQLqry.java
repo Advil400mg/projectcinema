@@ -9,11 +9,13 @@ package sql;
  *
  * @author Tanguy
  */
+
 public class SQLqry {
     protected String driver;
     protected String url;
     protected String username;
     protected String password;
+    
     
     public SQLqry()
     {
