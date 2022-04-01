@@ -35,7 +35,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="1189" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="1110" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
@@ -84,7 +84,7 @@
                       <Component id="jSeparatorCinemaName1" min="-2" pref="22" max="-2" attributes="0"/>
                       <Component id="PanelSecondBackground1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="128" max="32767" attributes="0"/>
+                  <EmptySpace pref="49" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -111,13 +111,20 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jButtonCreate" min="-2" pref="204" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
+                      <Component id="jButtonCancel" min="-2" pref="204" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="329" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabelName" min="-2" pref="175" max="-2" attributes="0"/>
                           <Component id="jLabelMail" min="-2" pref="175" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jTextName" alignment="0" pref="982" max="32767" attributes="0"/>
-                              <Component id="jLabelName" min="-2" pref="175" max="-2" attributes="0"/>
                               <Component id="jLabelSurname" alignment="0" min="-2" pref="359" max="-2" attributes="0"/>
                               <Component id="jTextSurname" alignment="0" max="32767" attributes="0"/>
                           </Group>
@@ -128,13 +135,6 @@
                           <Component id="jTextPassword" alignment="0" min="-2" pref="990" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="99" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="jButtonCreate" min="-2" pref="204" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
-                      <Component id="jButtonCancel" min="-2" pref="204" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="329" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
