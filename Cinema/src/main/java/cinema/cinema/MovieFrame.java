@@ -4,6 +4,12 @@
  */
 package cinema.cinema;
 
+import java.awt.Image;
+import java.io.File;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import sql.Film;
 
 /**
@@ -86,6 +92,11 @@ public class MovieFrame extends javax.swing.JFrame {
 
         jButtonLoadImage.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jButtonLoadImage.setText("Load Image");
+        jButtonLoadImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLoadImageActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(122, 72, 221));
 
@@ -232,6 +243,44 @@ public class MovieFrame extends javax.swing.JFrame {
         Film film = new Film();
         film.loadFilmIntoList(jListMovies);
     }//GEN-LAST:event_jButtonRefreshActionPerformed
+
+    private void jButtonLoadImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoadImageActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+ 
+        //Limit type of file name extensions supported.
+ 
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("4 Extensions Supported", "jpg", "png", "jpeg", "gif");
+ 
+        fileChooser.setFileFilter(filter);
+ 
+        int selected = fileChooser.showOpenDialog(null);
+ 
+        //check if open button has been clicked.
+ 
+        if (selected == JFileChooser.APPROVE_OPTION) {
+ 
+            File file = fileChooser.getSelectedFile();
+ 
+            //Get Path of the selected image.
+ 
+            String getselectedImage = file.getAbsolutePath();
+ 
+            //Display image path on Message Dialog
+ 
+            JOptionPane.showMessageDialog(null, getselectedImage);
+ 
+            ImageIcon imIco = new ImageIcon(getselectedImage);
+ 
+            //make image fit on jlabel.
+ 
+            Image imFit = imIco.getImage();
+ 
+            Image imgFit = imFit.getScaledInstance(  jLabelLoadImage.getWidth(),   jLabelLoadImage.getHeight(), Image.SCALE_SMOOTH);
+ 
+            jLabelLoadImage.setIcon(new ImageIcon(imgFit));
+        }
+    }//GEN-LAST:event_jButtonLoadImageActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
