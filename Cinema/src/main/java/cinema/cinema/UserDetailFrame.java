@@ -275,7 +275,6 @@ public class UserDetailFrame extends javax.swing.JFrame {
         jListTickets.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jScrollPane3.setViewportView(jListTickets);
 
-        jListRecords.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jScrollPane4.setViewportView(jListRecords);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

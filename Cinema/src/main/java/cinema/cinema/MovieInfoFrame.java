@@ -212,6 +212,7 @@ public class MovieInfoFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelCinemaName9;
     private javax.swing.JButton jButton1;
