@@ -4,6 +4,8 @@
  */
 package cinema.cinema;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author 33659
@@ -153,8 +155,6 @@ public class UserDetailFrame extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(122, 72, 221));
 
-        jLabel1AdminIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cinema/cinema/Icon/icons8-admin-64.png"))); // NOI18N
-
         jLabelUserDetail.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabelUserDetail.setForeground(new java.awt.Color(204, 204, 204));
         jLabelUserDetail.setText("User Detail");
@@ -210,7 +210,6 @@ public class UserDetailFrame extends javax.swing.JFrame {
             }
         });
 
-        jButtonUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cinema/cinema/Icon/icons8-approuver-et-mettre-à-jour-30.png"))); // NOI18N
         jButtonUpdate.setText("Update");
         jButtonUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,7 +217,6 @@ public class UserDetailFrame extends javax.swing.JFrame {
             }
         });
 
-        jButtonDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cinema/cinema/Icon/icons8-supprimer-24.png"))); // NOI18N
         jButtonDelete.setText("Delete");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -355,10 +353,21 @@ public class UserDetailFrame extends javax.swing.JFrame {
     private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonUpdateActionPerformed
-
+    protected ImageIcon createImageIcon(String path,
+                                               String description) {
+                    java.net.URL imgURL = getClass().getResource(path);
+                    if (imgURL != null) {
+                            return new ImageIcon(imgURL, description);
+                    } else {
+                            System.err.println("Couldn't find file: " + path);
+                            return null;
+                    }
+            }
     /**
      * @param args the command line arguments
      */
+	 
+	
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -397,9 +406,6 @@ public class UserDetailFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonUpdate;
     private javax.swing.JCheckBox jCheckBoxUpdate;
     private javax.swing.JLabel jLabel1AdminIcon;
-    private javax.swing.JLabel jLabelAdminIcon;
-    private javax.swing.JLabel jLabelAdminIcon1;
-    private javax.swing.JLabel jLabelAdminIcon2;
     private javax.swing.JLabel jLabelBirthDate;
     private javax.swing.JLabel jLabelBirthdate;
     private javax.swing.JLabel jLabelEmail;
@@ -413,11 +419,8 @@ public class UserDetailFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTitleTicket;
     private javax.swing.JLabel jLabelUserDetail;
     private javax.swing.JLabel jLabelisEmployee;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPasswordField jPasswordField;
