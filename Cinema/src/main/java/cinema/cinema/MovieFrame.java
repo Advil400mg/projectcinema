@@ -4,6 +4,21 @@
  */
 package cinema.cinema;
 
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import sql.Film;
+
 /**
  *
  * @author 33659
@@ -13,8 +28,13 @@ public class MovieFrame extends javax.swing.JFrame {
     /**
      * Creates new form MovieFrame
      */
+    
+    Image currentImage = null;
+    
     public MovieFrame() {
         initComponents();
+        Film film = new Film();
+        film.loadFilmIntoList(jListMovies);
     }
 
     /**
@@ -46,7 +66,7 @@ public class MovieFrame extends javax.swing.JFrame {
         jListMovies = new javax.swing.JList<>();
         jLabelLoadImage = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         PanelBanner2.setBackground(new java.awt.Color(54, 33, 89));
 
@@ -76,12 +96,22 @@ public class MovieFrame extends javax.swing.JFrame {
         jTextFieldDuration.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jButtonAddMovie.setText("Add Movie");
+        jButtonAddMovie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddMovieActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
         jButtonLoadImage.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jButtonLoadImage.setText("Load Image");
+        jButtonLoadImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLoadImageActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(122, 72, 221));
 
@@ -109,9 +139,19 @@ public class MovieFrame extends javax.swing.JFrame {
 
         jButtonMovieInfo.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jButtonMovieInfo.setText("Movie Info");
+        jButtonMovieInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMovieInfoActionPerformed(evt);
+            }
+        });
 
         jButtonRefresh.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jButtonRefresh.setText("Refresh");
+        jButtonRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRefreshActionPerformed(evt);
+            }
+        });
 
         jListMovies.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jScrollPane2.setViewportView(jListMovies);
@@ -218,39 +258,106 @@ public class MovieFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MovieFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MovieFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MovieFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MovieFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jButtonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshActionPerformed
+        // TODO add your handling code here:
+        Film film = new Film();
+        film.loadFilmIntoList(jListMovies);
+    }//GEN-LAST:event_jButtonRefreshActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MovieFrame().setVisible(true);
+    //https://stackoverflow.com/questions/13605248/java-converting-image-to-bufferedimage
+    public static BufferedImage convertToBufferedImage(Image image)
+    {
+        BufferedImage newImage = new BufferedImage(
+            image.getWidth(null), image.getHeight(null),
+            BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = newImage.createGraphics();
+        g.drawImage(image, 0, 0, null);
+        g.dispose();
+        return newImage;
+    }
+    
+    private void jButtonLoadImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoadImageActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+ 
+        //Limit type of file name extensions supported.
+ 
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("4 Extensions Supported", "jpg", "png", "jpeg", "gif");
+ 
+        fileChooser.setFileFilter(filter);
+ 
+        int selected = fileChooser.showOpenDialog(null);
+ 
+        //check if open button has been clicked.
+ 
+        if (selected == JFileChooser.APPROVE_OPTION) {
+ 
+            File file = fileChooser.getSelectedFile();
+ 
+            //Get Path of the selected image.
+ 
+            String getselectedImage = file.getAbsolutePath();
+ 
+            //Display image path on Message Dialog
+ 
+            JOptionPane.showMessageDialog(null, getselectedImage);
+ 
+            ImageIcon imIco = new ImageIcon(getselectedImage);
+ 
+            //make image fit on jlabel.
+ 
+            Image imFit = imIco.getImage();
+            currentImage = imFit;
+            
+            Image imgFit = imFit.getScaledInstance(  jLabelLoadImage.getWidth(),   jLabelLoadImage.getHeight(), Image.SCALE_SMOOTH);
+ 
+ 
+            jLabelLoadImage.setIcon(new ImageIcon(imgFit));
+        }
+    }//GEN-LAST:event_jButtonLoadImageActionPerformed
+    //https://www.baeldung.com/java-check-string-number
+    public static boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            double d = Double.parseDouble(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
+    private void jButtonAddMovieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddMovieActionPerformed
+        if(currentImage!=null & !jTextFieldNameMovie.getText().isEmpty() & !jTextFieldGenre.getText().isEmpty() & isNumeric(jTextFieldDuration.getText()))
+        {
+            System.out.println("ON Y VA FILM");
+            String path = saveImg(currentImage,jTextFieldNameMovie.getText());
+            Film film = new Film();
+            film.insert(jTextFieldNameMovie.getText(), jTextFieldGenre.getText(), Integer.parseInt(jTextFieldDuration.getText()), path);
+        }
+        
+    }//GEN-LAST:event_jButtonAddMovieActionPerformed
+
+    private void jButtonMovieInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMovieInfoActionPerformed
+        // TODO add your handling code here:
+        if(jListMovies.isSelectionEmpty())
+        {
+            return;
+        }
+        MovieInfoFrame frm = new MovieInfoFrame(jListMovies.getSelectedValue());
+        frm.setVisible(true);
+    }//GEN-LAST:event_jButtonMovieInfoActionPerformed
+
+    public static String saveImg(Image imFit, String name)
+    {
+        String path = "src\\main\\java\\cinema\\cinema\\Filmimages\\" +name+ ".png";
+        BufferedImage im = convertToBufferedImage(imFit);
+            try {
+                ImageIO.write(im, "png", new File(path));
+            } catch (IOException ex) {
+                Logger.getLogger(MovieFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
-        });
+        return path;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

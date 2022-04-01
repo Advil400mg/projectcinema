@@ -4,17 +4,31 @@
  */
 package cinema.cinema;
 
+import javax.swing.ImageIcon;
+import sql.User;
+
 /**
  *
  * @author 33659
  */
 public class UserDetailFrame extends javax.swing.JFrame {
 
+
     /**
      * Creates new form UserDetailFrame
      */
-    public UserDetailFrame() {
+    public UserDetailFrame(String mail) {
+        User user = new User();
         initComponents();
+        String allvalues = user.getAll(mail);
+        String[] values = allvalues.split(" ");
+        jLabelName.setText(values[0]);
+        jLabelSurname.setText(values[1]);
+        jLabelBirthdate.setText(values[2]);
+        jLabelEmail.setText(values[3]);
+        jLabelPassword.setText(values[4]);
+        jLabelisEmployee.setText(values[5]);
+        
     }
 
     /**
@@ -38,6 +52,7 @@ public class UserDetailFrame extends javax.swing.JFrame {
         jCheckBoxUpdate = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
+        jLabel1AdminIcon = new javax.swing.JLabel();
         jLabelUserDetail = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabelTitleName = new javax.swing.JLabel();
@@ -57,7 +72,7 @@ public class UserDetailFrame extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         jListRecords = new javax.swing.JList<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel4.setBackground(new java.awt.Color(54, 33, 89));
         jPanel4.setForeground(new java.awt.Color(54, 33, 89));
@@ -341,47 +356,25 @@ public class UserDetailFrame extends javax.swing.JFrame {
     private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonUpdateActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+    protected ImageIcon createImageIcon(String path,
+                                               String description) {
+                    java.net.URL imgURL = getClass().getResource(path);
+                    if (imgURL != null) {
+                            return new ImageIcon(imgURL, description);
+                    } else {
+                            System.err.println("Couldn't find file: " + path);
+                            return null;
+                    }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UserDetailFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UserDetailFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UserDetailFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UserDetailFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new UserDetailFrame().setVisible(true);
-            }
-        });
-    }
+	 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelCinemaName11;
     private javax.swing.JButton jButtonDelete;
     private javax.swing.JButton jButtonUpdate;
     private javax.swing.JCheckBox jCheckBoxUpdate;
+    private javax.swing.JLabel jLabel1AdminIcon;
     private javax.swing.JLabel jLabelBirthDate;
     private javax.swing.JLabel jLabelBirthdate;
     private javax.swing.JLabel jLabelEmail;

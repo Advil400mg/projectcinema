@@ -19,8 +19,11 @@ public class Cinema {
     static User sql = new User();
 
     public static void main(String[] args) {
-      UserDetailFrame frm = new UserDetailFrame();
-        frm.setVisible(true);
+
+        /*Date date = Date.valueOf("2000-12-15");
+        sql.insert("Momo", "la truire","gobelin@amassue.com", date, "ouho", false);*/
         
+        LoginFrame first = new LoginFrame();
+        first.setVisible(true);
     }
 }

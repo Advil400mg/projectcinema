@@ -2,7 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.cinema;
+package cinema.cinema;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
+import sql.User;
 
 /**
  *
@@ -15,6 +19,9 @@ public class AdminFrame extends javax.swing.JFrame {
      */
     public AdminFrame() {
         initComponents();
+        User usr = new User();
+        usr.loadUserIntoAdmin(jListUser);
+        
     }
 
     /**
@@ -41,7 +48,7 @@ public class AdminFrame extends javax.swing.JFrame {
         jListUser = new javax.swing.JList<>();
         jPanel3 = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
         PanelBanner1.setBackground(new java.awt.Color(54, 33, 89));
@@ -54,6 +61,11 @@ public class AdminFrame extends javax.swing.JFrame {
         jButtonMovies.setFont(new java.awt.Font("Segoe UI", 1, 21)); // NOI18N
         jButtonMovies.setForeground(new java.awt.Color(204, 204, 204));
         jButtonMovies.setText("Movies");
+        jButtonMovies.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMoviesActionPerformed(evt);
+            }
+        });
 
         jButtonRecords.setBackground(new java.awt.Color(90, 64, 133));
         jButtonRecords.setFont(new java.awt.Font("Segoe UI", 1, 21)); // NOI18N
@@ -125,12 +137,30 @@ public class AdminFrame extends javax.swing.JFrame {
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jButton3.setText("Account Details");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jButton4.setText("Disconnect");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jTextFieldReference.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
-        jTextFieldReference.setText("Name/Surname/Email");
+        jTextFieldReference.setToolTipText("");
+        jTextFieldReference.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldReferenceKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldReferenceKeyReleased(evt);
+            }
+        });
 
         jListUser.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jScrollPane1.setViewportView(jListUser);
@@ -187,13 +217,13 @@ public class AdminFrame extends javax.swing.JFrame {
                 .addComponent(PanelBanner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanelBanner2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addComponent(jPanelBanner2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,40 +246,55 @@ public class AdminFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonRecordsActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if(jListUser.isSelectionEmpty())
+        {
+            return;
         }
-        //</editor-fold>
+        String mail = jListUser.getSelectedValue().split(" ")[0];
+        UserDetailFrame frm = new UserDetailFrame(mail);
+        frm.setVisible(true);
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AdminFrame().setVisible(true);
-            }
-        });
-    }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButtonMoviesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMoviesActionPerformed
+        // TODO add your handling code here:
+        MovieFrame moviefrm = new MovieFrame();
+        moviefrm.setVisible(true);
+    }//GEN-LAST:event_jButtonMoviesActionPerformed
+
+    private void jTextFieldReferenceKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldReferenceKeyPressed
+        // TODO add your handling code here:
+        User user = new User();
+        if(jTextFieldReference.getText().isEmpty())
+        {
+            user.loadUserIntoAdmin(jListUser);
+        }
+        else
+        {
+            user.loadUserIntoAdminFilter(jListUser, jTextFieldReference.getText());
+        }
+        
+    }//GEN-LAST:event_jTextFieldReferenceKeyPressed
+
+    private void jTextFieldReferenceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldReferenceKeyReleased
+        // TODO add your handling code here:
+        User user = new User();
+        if(jTextFieldReference.getText().isEmpty())
+        {
+            user.loadUserIntoAdmin(jListUser);
+        }
+        else
+        {
+            user.loadUserIntoAdminFilter(jListUser, jTextFieldReference.getText());
+        }
+    }//GEN-LAST:event_jTextFieldReferenceKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelCinemaName3;

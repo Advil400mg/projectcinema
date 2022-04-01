@@ -4,6 +4,7 @@
  */
 package sql;
 
+import cinema.cinema.AdminFrame;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -22,6 +23,9 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Tanguy
@@ -65,6 +69,7 @@ public class User extends SQLqry{
     public boolean isConnected(String user_mail, String user_password)
     {
         boolean connected = false;
+        boolean isEmployee = false;
         try
         {
             Class.forName(driver);   
@@ -75,11 +80,25 @@ public class User extends SQLqry{
             st.setString(1, user_mail);
             st.setString(2, user_password);
             ResultSet rs = st.executeQuery();
-            if(rs.next())
+            if(rs.isBeforeFirst())
             {
+                rs.next();
                 connected = true;
-            }
-            
+                ConnectedUser.clear();
+                ConnectedUser.email = user_mail;
+                isEmployee = rs.getBoolean(1);
+                if(isEmployee)
+                {
+                    System.out.println("isEmployee");
+                    AdminFrame admin = new AdminFrame();
+                    admin.setVisible(true);
+                }
+                else
+                {
+                    System.out.println("Is not employee");
+                }
+                
+            }           
         }
         catch(SQLException e)
         {
@@ -122,7 +141,109 @@ public class User extends SQLqry{
         return exists;
     }
     
-    public void verifyAddress(String mail_address) throws MessagingException
+    public void loadUserIntoAdmin(javax.swing.JList<String> list)
+    {
+        DefaultListModel m = new DefaultListModel();
+        try
+        {
+            Class.forName(driver);   
+            
+            Connection con = DriverManager.getConnection(url, username, password);
+            String qry = "SELECT mail,name,surname FROM user";
+            PreparedStatement st = con.prepareStatement(qry);
+            ResultSet rs = st.executeQuery();
+
+            
+            while(rs.next())
+            {
+                String info = rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3);
+                m.addElement(info);
+                
+            }
+            list.setModel(m);
+            
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void loadUserIntoAdminFilter(javax.swing.JList<String> list, String text)
+    {
+        DefaultListModel m = new DefaultListModel();
+        try
+        {
+            Class.forName(driver);   
+            
+            Connection con = DriverManager.getConnection(url, username, password);
+            String qry = "SELECT mail,name,surname FROM user WHERE name LIKE ?";
+            qry+= " OR surname LIKE ?";
+            qry+= " OR mail LIKE ?";
+            PreparedStatement st = con.prepareStatement(qry);
+            st.setString(1, text+"%");
+            st.setString(2, text+"%");
+            st.setString(3, text+"%");
+            ResultSet rs = st.executeQuery();
+
+            
+            while(rs.next())
+            {
+                String info = rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3);
+                m.addElement(info);
+                
+            }
+            list.setModel(m);
+            
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public String getAll(String mail)
+    {
+        String returnValue = "";
+        try
+        {
+            Class.forName(driver);   
+            
+            Connection con = DriverManager.getConnection(url, username, password);
+            String qry = "SELECT * FROM user WHERE mail LIKE ?";
+            PreparedStatement st = con.prepareStatement(qry);
+            st.setString(1, mail);
+            ResultSet rs = st.executeQuery();
+
+            
+            while(rs.next())
+            {
+                returnValue = rs.getString(2) + " " + rs.getString(3) + " "+ rs.getString(4) + " " +  rs.getString(5) + " " + rs.getString(6) + " "+  rs.getString(7);
+                
+            }
+            
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        return returnValue;
+    }
+    
+    public boolean verifyAddress(String mail_address) throws MessagingException
     {
         Properties properties = new Properties();
         Random r = new Random();
@@ -160,6 +281,14 @@ public class User extends SQLqry{
         
         Transport.send(message);
         System.out.println("Message envoyé");
+        
+        String value = JOptionPane.showInputDialog("Code envoyé par mail");
+        if(!(value == null ? code == null : value.equals(code)))
+        {
+        } else {
+            return true;
+        }
+        return false;
         
 
     }

@@ -4,6 +4,10 @@
  */
 package cinema.cinema;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import sql.Film;
+
 /**
  *
  * @author 33659
@@ -13,8 +17,26 @@ public class MovieInfoFrame extends javax.swing.JFrame {
     /**
      * Creates new form MovieInfoFrame
      */
-    public MovieInfoFrame() {
+    String moviepath;
+    String uid;
+    public MovieInfoFrame(String name) {
         initComponents();
+        Film film = new Film();
+        String allvalues = film.getFilm(name);
+        String[] values = allvalues.split(" ");
+        uid = values[0];
+        jLabelName.setText(values[1]);
+        jLabelGenre.setText(values[2]);
+        jLabelDuration.setText(values[3]);
+        moviepath = values[4];
+        
+        try {
+            ImageIcon imIco = new ImageIcon(moviepath);
+            Image imFit = imIco.getImage();
+            Image imgFit = imFit.getScaledInstance(jLabelImageMovie.getWidth(), jLabelImageMovie.getHeight(), Image.SCALE_SMOOTH);
+            jLabelImageMovie.setIcon(new ImageIcon(imgFit));
+        } catch (Exception e) {
+        }
     }
 
     /**
@@ -44,7 +66,7 @@ public class MovieInfoFrame extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jListInfo = new javax.swing.JList<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(54, 33, 89));
         jPanel1.setForeground(new java.awt.Color(204, 204, 204));
@@ -67,6 +89,11 @@ public class MovieInfoFrame extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jButton1.setText("Quit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -211,10 +238,12 @@ public class MovieInfoFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelCinemaName9;
