@@ -43,7 +43,7 @@ public class AddSessionFrame extends javax.swing.JFrame {
         jButtonAdd = new javax.swing.JButton();
         jButtonQuit = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(54, 33, 89));
         jPanel1.setForeground(new java.awt.Color(54, 33, 89));
@@ -193,10 +193,6 @@ public class AddSessionFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    /**
-     * @param args the command line arguments
-     */
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

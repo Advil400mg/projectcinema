@@ -44,7 +44,7 @@ public class MovieInfoFrame extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jListInfo = new javax.swing.JList<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(54, 33, 89));
         jPanel1.setForeground(new java.awt.Color(204, 204, 204));
@@ -211,10 +211,7 @@ public class MovieInfoFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelCinemaName9;
