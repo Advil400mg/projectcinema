@@ -4,8 +4,15 @@
  */
 package cinema.cinema;
 
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -21,6 +28,9 @@ public class MovieFrame extends javax.swing.JFrame {
     /**
      * Creates new form MovieFrame
      */
+    
+    Image currentImage = null;
+    
     public MovieFrame() {
         initComponents();
         Film film = new Film();
@@ -86,6 +96,11 @@ public class MovieFrame extends javax.swing.JFrame {
         jTextFieldDuration.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         jButtonAddMovie.setText("Add Movie");
+        jButtonAddMovie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddMovieActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -124,6 +139,11 @@ public class MovieFrame extends javax.swing.JFrame {
 
         jButtonMovieInfo.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jButtonMovieInfo.setText("Movie Info");
+        jButtonMovieInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMovieInfoActionPerformed(evt);
+            }
+        });
 
         jButtonRefresh.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jButtonRefresh.setText("Refresh");
@@ -244,6 +264,18 @@ public class MovieFrame extends javax.swing.JFrame {
         film.loadFilmIntoList(jListMovies);
     }//GEN-LAST:event_jButtonRefreshActionPerformed
 
+    //https://stackoverflow.com/questions/13605248/java-converting-image-to-bufferedimage
+    public static BufferedImage convertToBufferedImage(Image image)
+    {
+        BufferedImage newImage = new BufferedImage(
+            image.getWidth(null), image.getHeight(null),
+            BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = newImage.createGraphics();
+        g.drawImage(image, 0, 0, null);
+        g.dispose();
+        return newImage;
+    }
+    
     private void jButtonLoadImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoadImageActionPerformed
         // TODO add your handling code here:
         JFileChooser fileChooser = new JFileChooser();
@@ -275,13 +307,58 @@ public class MovieFrame extends javax.swing.JFrame {
             //make image fit on jlabel.
  
             Image imFit = imIco.getImage();
- 
+            currentImage = imFit;
+            
             Image imgFit = imFit.getScaledInstance(  jLabelLoadImage.getWidth(),   jLabelLoadImage.getHeight(), Image.SCALE_SMOOTH);
+ 
  
             jLabelLoadImage.setIcon(new ImageIcon(imgFit));
         }
     }//GEN-LAST:event_jButtonLoadImageActionPerformed
+    //https://www.baeldung.com/java-check-string-number
+    public static boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            double d = Double.parseDouble(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
+    private void jButtonAddMovieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddMovieActionPerformed
+        if(currentImage!=null & !jTextFieldNameMovie.getText().isEmpty() & !jTextFieldGenre.getText().isEmpty() & isNumeric(jTextFieldDuration.getText()))
+        {
+            System.out.println("ON Y VA FILM");
+            String path = saveImg(currentImage,jTextFieldNameMovie.getText());
+            Film film = new Film();
+            film.insert(jTextFieldNameMovie.getText(), jTextFieldGenre.getText(), Integer.parseInt(jTextFieldDuration.getText()), path);
+        }
+        
+    }//GEN-LAST:event_jButtonAddMovieActionPerformed
 
+    private void jButtonMovieInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMovieInfoActionPerformed
+        // TODO add your handling code here:
+        if(jListMovies.isSelectionEmpty())
+        {
+            return;
+        }
+        MovieInfoFrame frm = new MovieInfoFrame(jListMovies.getSelectedValue());
+        frm.setVisible(true);
+    }//GEN-LAST:event_jButtonMovieInfoActionPerformed
+
+    public static String saveImg(Image imFit, String name)
+    {
+        String path = "src\\main\\java\\cinema\\cinema\\Filmimages\\" +name+ ".png";
+        BufferedImage im = convertToBufferedImage(imFit);
+            try {
+                ImageIO.write(im, "png", new File(path));
+            } catch (IOException ex) {
+                Logger.getLogger(MovieFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        return path;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelCinemaName4;

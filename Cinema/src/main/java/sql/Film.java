@@ -48,6 +48,38 @@ public class Film extends SQLqry{
         }
     }
     
+    public String getFilm(String name)
+    {
+        String returnValue = "";
+        try
+        {
+            Class.forName(driver);   
+            
+            Connection con = DriverManager.getConnection(url, username, password);
+            String qry = "SELECT * FROM film WHERE name = ?";
+            PreparedStatement st = con.prepareStatement(qry);
+            st.setString(1,name);
+            ResultSet rs = st.executeQuery();
+
+            
+            while(rs.next())
+            {
+                returnValue = rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + " " + rs.getString(5);
+                
+            }
+            
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        return returnValue;
+    }
+    
     public void loadFilmIntoList(javax.swing.JList<String> list)
     {
         DefaultListModel m = new DefaultListModel();
