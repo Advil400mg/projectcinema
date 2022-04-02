@@ -4,7 +4,9 @@
  */
 package cinema.cinema;
 
+import sql.ConnectedUser;
 import sql.Film;
+import sql.Ticket;
 import sql.User;
 
 /**
@@ -19,7 +21,9 @@ public class ClientFrame extends javax.swing.JFrame {
     String mail;
     String uid;
     public ClientFrame(String mail) {
+        
         initComponents();
+        
         User user = new User();
         this.mail = mail;
         String userinfo = user.getAll(mail);
@@ -31,6 +35,12 @@ public class ClientFrame extends javax.swing.JFrame {
         
         Film film = new Film();
         film.loadFilmIntoList(jListTicketDetail1);
+        Ticket ticket = new Ticket();
+        ticket.loadTicketIntoList(uid, jListTicketDetail);
+        ConnectedUser.clear();
+        ConnectedUser.userid = uid;
+        ConnectedUser.email = mail;
+        
     }
 
     /**
@@ -167,7 +177,12 @@ public class ClientFrame extends javax.swing.JFrame {
         });
 
         jButtonTicketDetail.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
-        jButtonTicketDetail.setText("Ticket detail");
+        jButtonTicketDetail.setText("Refresh");
+        jButtonTicketDetail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTicketDetailActionPerformed(evt);
+            }
+        });
 
         jListTicketDetail.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jScrollPane3.setViewportView(jListTicketDetail);
@@ -254,9 +269,15 @@ public class ClientFrame extends javax.swing.JFrame {
         {
             return;
         }
-        MovieInfoClientFrame frame = new MovieInfoClientFrame(jListTicketDetail1.getSelectedValue(),uid);
+        MovieInfoClientFrame frame = new MovieInfoClientFrame(jListTicketDetail1.getSelectedValue());
         frame.setVisible(true);
     }//GEN-LAST:event_jButtonMovieDetailActionPerformed
+
+    private void jButtonTicketDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTicketDetailActionPerformed
+        // TODO add your handling code here:
+        Ticket ticket = new Ticket();
+        ticket.loadTicketIntoList(uid, jListTicketDetail);
+    }//GEN-LAST:event_jButtonTicketDetailActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

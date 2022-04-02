@@ -4,6 +4,13 @@
  */
 package cinema.cinema;
 
+import java.awt.Image;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import sql.ConnectedUser;
 import sql.Prices;
 
 /**
@@ -17,18 +24,29 @@ public class BuyTicketFrame extends javax.swing.JFrame {
     /**
      * Creates new form BuyTicketFrame
      */
-    String userid;
-    int totalPrice;
-    int userPrice;
+    String sessionid;
+    static int totalPrice;
+    static int userPrice;
     
-    int childPrice;
-    int regularPrice;
-    int seniorPrice;
-    int registeredPrice;
+    static int childPrice;
+    static int regularPrice;
+    static int seniorPrice;
+    static int registeredPrice;
     
-    public BuyTicketFrame(String userid) {
+    static int nbChild = 0;
+    static int nbRegular = 0;
+    static int nbSenior = 0;
+    
+    static int willCome = 0;
+    
+    private static Object lock = new Object();
+    
+    public boolean purchaseOK = false;
+    
+    
+    public BuyTicketFrame(String sessionid, String moviepath) {
         initComponents();
-        this.userid = userid;
+        this.sessionid = sessionid;
         Prices pricessql = new Prices();
         String allprices = pricessql.getAll();
         System.out.println(allprices);
@@ -41,10 +59,20 @@ public class BuyTicketFrame extends javax.swing.JFrame {
         
         userPrice = registeredPrice;
         
-        jLabelPrice.setText(formatEuro(userPrice));
-        jLabelPriceChild.setText(formatEuro(childPrice));
-        jLabelPriceRegular.setText(formatEuro(regularPrice));
-        jLabelPriceSenior.setText(formatEuro(seniorPrice));
+        jLabelPrice.setText(formatEuro(willCome * userPrice));
+        jLabelPriceChild.setText(formatEuro(nbChild * childPrice));
+        jLabelPriceRegular.setText(formatEuro(nbRegular * regularPrice));
+        jLabelPriceSenior.setText(formatEuro(nbSenior * seniorPrice));
+        jLabelTotalPrice.setText(formatEuro(totalPrice));
+        updatePrice();
+        
+        try {
+            ImageIcon imIco = new ImageIcon(moviepath);
+            Image imFit = imIco.getImage();
+            Image imgFit = imFit.getScaledInstance(jLabelImageMovie.getWidth(), jLabelImageMovie.getHeight(), Image.SCALE_SMOOTH);
+            jLabelImageMovie.setIcon(new ImageIcon(imgFit));
+        } catch (Exception e) {
+        }
 
         
     }
@@ -52,6 +80,12 @@ public class BuyTicketFrame extends javax.swing.JFrame {
     public static String formatEuro(int value)
     {
         return value + " €";
+    }
+    
+    public static void updatePrice()
+    {
+        totalPrice = nbChild * childPrice + nbRegular * regularPrice + nbSenior * seniorPrice + willCome * userPrice;
+        jLabelTotalPrice.setText(formatEuro(totalPrice));
     }
 
     /**
@@ -76,9 +110,7 @@ public class BuyTicketFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabelPrice = new javax.swing.JLabel();
         jRadioButtonBuyForMe = new javax.swing.JRadioButton();
-        jRadioButtonStudent = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
-        jRadioButtonStudent1 = new javax.swing.JRadioButton();
         jLabelTitleChild = new javax.swing.JLabel();
         jLabelTitleChild1 = new javax.swing.JLabel();
         jLabelTitleChild2 = new javax.swing.JLabel();
@@ -91,7 +123,7 @@ public class BuyTicketFrame extends javax.swing.JFrame {
         jLabelImageMovie = new javax.swing.JLabel();
         jButtonPurchase = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel4.setBackground(new java.awt.Color(54, 33, 89));
         jPanel4.setForeground(new java.awt.Color(54, 33, 89));
@@ -165,15 +197,14 @@ public class BuyTicketFrame extends javax.swing.JFrame {
 
         jRadioButtonBuyForMe.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jRadioButtonBuyForMe.setText("Buy for me");
-
-        jRadioButtonStudent.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jRadioButtonStudent.setText("Child");
+        jRadioButtonBuyForMe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonBuyForMeActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jLabel2.setText("*a student has to show a valid student card once arrived");
-
-        jRadioButtonStudent1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jRadioButtonStudent1.setText("Senior");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -186,10 +217,7 @@ public class BuyTicketFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabelPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButtonBuyForMe)
-                    .addComponent(jRadioButtonStudent)
-                    .addComponent(jRadioButtonStudent1))
+                .addComponent(jRadioButtonBuyForMe)
                 .addGap(47, 47, 47))
         );
         jPanel3Layout.setVerticalGroup(
@@ -199,11 +227,7 @@ public class BuyTicketFrame extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jRadioButtonBuyForMe)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButtonStudent)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButtonStudent1)
-                        .addGap(18, 18, 18))
+                        .addGap(102, 102, 102))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -225,6 +249,27 @@ public class BuyTicketFrame extends javax.swing.JFrame {
         jLabelTitleChild2.setForeground(new java.awt.Color(102, 102, 102));
         jLabelTitleChild2.setText("Senior (60+) :");
 
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0, 0, 5, 1));
+        jSpinner1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinner1StateChanged(evt);
+            }
+        });
+
+        jSpinner2.setModel(new javax.swing.SpinnerNumberModel(0, 0, 5, 1));
+        jSpinner2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinner2StateChanged(evt);
+            }
+        });
+
+        jSpinner3.setModel(new javax.swing.SpinnerNumberModel(0, 0, 5, 1));
+        jSpinner3.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinner3StateChanged(evt);
+            }
+        });
+
         jLabelTitleChild3.setFont(new java.awt.Font("Sitka Text", 2, 24)); // NOI18N
         jLabelTitleChild3.setForeground(new java.awt.Color(54, 33, 89));
         jLabelTitleChild3.setText("Are you coming with someone else? ");
@@ -237,6 +282,11 @@ public class BuyTicketFrame extends javax.swing.JFrame {
 
         jButtonPurchase.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jButtonPurchase.setText("Purchase");
+        jButtonPurchase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPurchaseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -350,6 +400,55 @@ public class BuyTicketFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jSpinner3StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner3StateChanged
+        // TODO add your handling code here:
+        nbChild = (int)jSpinner3.getValue();
+        updatePrice();
+        jLabelPriceChild.setText(formatEuro(nbChild * childPrice));
+    }//GEN-LAST:event_jSpinner3StateChanged
+
+    private void jSpinner2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner2StateChanged
+        // TODO add your handling code here:
+        nbRegular = (int)jSpinner2.getValue();
+        updatePrice();
+        jLabelPriceRegular.setText(formatEuro(nbRegular * regularPrice));
+
+    }//GEN-LAST:event_jSpinner2StateChanged
+
+    private void jSpinner1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner1StateChanged
+        // TODO add your handling code here:
+        nbSenior = (int)jSpinner1.getValue();
+        updatePrice();
+        jLabelPriceSenior.setText(formatEuro(nbSenior * seniorPrice));
+        
+    }//GEN-LAST:event_jSpinner1StateChanged
+
+    private void jRadioButtonBuyForMeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonBuyForMeActionPerformed
+        // TODO add your handling code here:
+        if(jRadioButtonBuyForMe.isSelected())
+        {
+            willCome = 1;
+        }
+        else
+        {
+            willCome = 0;
+        }
+        updatePrice();
+        jLabelPrice.setText(formatEuro(willCome * userPrice));
+        
+    }//GEN-LAST:event_jRadioButtonBuyForMeActionPerformed
+
+    private void jButtonPurchaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPurchaseActionPerformed
+        // TODO add your handling code here:
+        PaymentFrame frame = new PaymentFrame(this,sessionid);
+        frame.setVisible(true);
+       
+        if(purchaseOK)
+        {
+            System.out.println("BUY");
+        }
+    }//GEN-LAST:event_jButtonPurchaseActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -363,22 +462,20 @@ public class BuyTicketFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelImageMovie;
     private javax.swing.JLabel jLabelPrice;
-    private javax.swing.JLabel jLabelPriceChild;
-    private javax.swing.JLabel jLabelPriceRegular;
-    private javax.swing.JLabel jLabelPriceSenior;
+    private static javax.swing.JLabel jLabelPriceChild;
+    private static javax.swing.JLabel jLabelPriceRegular;
+    private static javax.swing.JLabel jLabelPriceSenior;
     private javax.swing.JLabel jLabelTitleChild;
     private javax.swing.JLabel jLabelTitleChild1;
     private javax.swing.JLabel jLabelTitleChild2;
     private javax.swing.JLabel jLabelTitleChild3;
     private javax.swing.JLabel jLabelTitlePrice;
-    private javax.swing.JLabel jLabelTotalPrice;
+    private static javax.swing.JLabel jLabelTotalPrice;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JRadioButton jRadioButtonBuyForMe;
-    private javax.swing.JRadioButton jRadioButtonStudent;
-    private javax.swing.JRadioButton jRadioButtonStudent1;
     private javax.swing.JSeparator jSeparatorCinemaName3;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;

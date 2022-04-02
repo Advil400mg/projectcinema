@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 
 /**
@@ -84,8 +85,9 @@ public class Session extends SQLqry{
         }
     }
     
-    public void loadSessionIntoList(javax.swing.JList<String> list, String filmname)
+    public void loadSessionIntoList(javax.swing.JList<String> list, ArrayList<String> allids ,String filmname)
     {
+        allids.clear();
         DefaultListModel m = new DefaultListModel();
         try
         {
@@ -100,8 +102,9 @@ public class Session extends SQLqry{
             
             while(rs.next())
             {
-                String info = rs.getString(2) + " " + rs.getString(3);
+                String info = rs.getString(2) + " " + rs.getString(3) ;
                 m.addElement(info);
+                allids.add(rs.getString(1));
                 
             }
             list.setModel(m);

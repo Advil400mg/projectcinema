@@ -5,7 +5,9 @@
 package cinema.cinema;
 
 import java.awt.Image;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import sql.ConnectedUser;
 import sql.Film;
 import sql.Session;
 
@@ -21,9 +23,11 @@ public class MovieInfoClientFrame extends javax.swing.JFrame {
     String filmname;
     String moviepath;
     String uid;
+    ArrayList<String> allids;
     
-    public MovieInfoClientFrame(String filmname, String uid) {
+    public MovieInfoClientFrame(String filmname) {
         initComponents();
+        allids = new ArrayList<>();
         this.filmname = filmname;
         Film film = new Film();
         Session session = new Session();
@@ -32,8 +36,8 @@ public class MovieInfoClientFrame extends javax.swing.JFrame {
         jLabelMovieName.setText(filmname);
         jLabelGenre.setText(values[2]);
         jLabelDuration.setText(values[3]);
-        session.loadSessionIntoList(jListSession, filmname);
-        this.uid = uid;
+        session.loadSessionIntoList(jListSession,allids, filmname);
+        this.uid = ConnectedUser.userid;
         
         moviepath = values[4];
         
@@ -230,7 +234,9 @@ public class MovieInfoClientFrame extends javax.swing.JFrame {
         {
             return;
         }
-        BuyTicketFrame frm = new BuyTicketFrame(uid);
+
+        String[] info = jListSession.getSelectedValue().split(" ");
+        BuyTicketFrame frm = new BuyTicketFrame(allids.get(jListSession.getSelectedIndex()), moviepath);
         frm.setVisible(true);
     }//GEN-LAST:event_jButtonBuyActionPerformed
 

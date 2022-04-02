@@ -4,6 +4,9 @@
  */
 package cinema.cinema;
 
+import sql.ConnectedUser;
+import sql.Ticket;
+
 /**
  *
  * @author 33659
@@ -12,9 +15,15 @@ public class PaymentFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form PayementFramne
+
      */
-    public PaymentFrame() {
+    String sessionid;
+    BuyTicketFrame frm;
+
+    public PaymentFrame(BuyTicketFrame frm,String sessionid) {
         initComponents();
+        this.sessionid = sessionid;
+        this.frm = frm;
     }
 
     /**
@@ -46,7 +55,7 @@ public class PaymentFrame extends javax.swing.JFrame {
 
         jLabel1.setText("jLabel1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel4.setBackground(new java.awt.Color(54, 33, 89));
         jPanel4.setForeground(new java.awt.Color(54, 33, 89));
@@ -99,6 +108,11 @@ public class PaymentFrame extends javax.swing.JFrame {
 
         jButtonPurchase.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jButtonPurchase.setText("Purchase");
+        jButtonPurchase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPurchaseActionPerformed(evt);
+            }
+        });
 
         jTextFieldName.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
@@ -154,7 +168,7 @@ public class PaymentFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldName1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelCardNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(85, 85, 85)
+                .addGap(70, 70, 70)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelDate, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldName3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -196,7 +210,7 @@ public class PaymentFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 1252, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,6 +219,18 @@ public class PaymentFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonPurchaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPurchaseActionPerformed
+        // TODO add your handling code here:
+        if(!jTextFieldName.getText().isEmpty() & !jTextFieldName.getText().isEmpty() & !jTextFieldName2.getText().isEmpty() & !jTextFieldName2.getText().isEmpty())
+        {
+            ConnectedUser.purchaseok = true;
+            Ticket ticket = new Ticket();
+            ticket.insert(sessionid, ConnectedUser.userid);
+            this.dispose();
+            frm.dispose();
+        }
+    }//GEN-LAST:event_jButtonPurchaseActionPerformed
 
     /**
      * @param args the command line arguments
