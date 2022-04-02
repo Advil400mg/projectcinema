@@ -4,6 +4,7 @@
  */
 package sql;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -100,6 +101,29 @@ public class Film extends SQLqry{
                 
             }
             list.setModel(m);
+            
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void deleteFilm(String filmid)
+    {
+        try
+        {
+            Class.forName(driver);   
+            
+            Connection con = DriverManager.getConnection(url, username, password);
+            String qry = "{CALL Deletefilm(?)}";
+            CallableStatement st = con.prepareCall(qry);
+            st.setString(1, filmid);
+            st.executeQuery();
             
         }
         catch(SQLException e)

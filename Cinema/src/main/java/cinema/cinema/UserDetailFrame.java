@@ -5,6 +5,7 @@
 package cinema.cinema;
 
 import javax.swing.ImageIcon;
+import sql.Ticket;
 import sql.User;
 
 /**
@@ -17,6 +18,7 @@ public class UserDetailFrame extends javax.swing.JFrame {
     /**
      * Creates new form UserDetailFrame
      */
+    String mail;
     public UserDetailFrame(String mail) {
         User user = new User();
         initComponents();
@@ -28,6 +30,10 @@ public class UserDetailFrame extends javax.swing.JFrame {
         jLabelEmail.setText(values[3]);
         jLabelPassword.setText(values[4]);
         jLabelisEmployee.setText(values[5]);
+        this.mail = mail;
+        
+        Ticket ticket = new Ticket();
+        ticket.loadTicketIntoList(values[6], jListTickets);
         
     }
 
@@ -226,6 +232,11 @@ public class UserDetailFrame extends javax.swing.JFrame {
         });
 
         jButtonDelete.setText("Delete");
+        jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -356,6 +367,12 @@ public class UserDetailFrame extends javax.swing.JFrame {
     private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonUpdateActionPerformed
+
+    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
+        // TODO add your handling code here:
+        User user = new User();
+        user.deleteAccount(this.mail);
+    }//GEN-LAST:event_jButtonDeleteActionPerformed
     protected ImageIcon createImageIcon(String path,
                                                String description) {
                     java.net.URL imgURL = getClass().getResource(path);

@@ -102,7 +102,7 @@ public class Session extends SQLqry{
             
             while(rs.next())
             {
-                String info = rs.getString(2) + " " + rs.getString(3) ;
+                String info = rs.getString(4) + " " + rs.getString(2) + " " + rs.getString(6);
                 m.addElement(info);
                 allids.add(rs.getString(1));
                 

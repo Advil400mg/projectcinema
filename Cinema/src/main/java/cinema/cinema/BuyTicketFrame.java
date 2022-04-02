@@ -440,7 +440,7 @@ public class BuyTicketFrame extends javax.swing.JFrame {
 
     private void jButtonPurchaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPurchaseActionPerformed
         // TODO add your handling code here:
-        PaymentFrame frame = new PaymentFrame(this,sessionid);
+        PaymentFrame frame = new PaymentFrame(this,sessionid, nbChild, nbRegular, nbSenior, willCome, totalPrice);
         frame.setVisible(true);
        
         if(purchaseOK)

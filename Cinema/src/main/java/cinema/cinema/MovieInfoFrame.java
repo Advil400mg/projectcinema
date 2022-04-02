@@ -5,6 +5,7 @@
 package cinema.cinema;
 
 import java.awt.Image;
+import java.io.File;
 import javax.swing.ImageIcon;
 import sql.Film;
 import sql.Session;
@@ -185,6 +186,11 @@ public class MovieInfoFrame extends javax.swing.JFrame {
 
         jButton6.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jButton6.setText("Delete Movie");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jListInfo.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jScrollPane2.setViewportView(jListInfo);
@@ -271,6 +277,21 @@ public class MovieInfoFrame extends javax.swing.JFrame {
         frm.setVisible(true);
         
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        Film film = new Film();
+        film.deleteFilm(uid);
+        File file = new File(moviepath);
+        if(file.delete())
+        {
+            System.out.println("File deleted");
+        }
+        else
+        {
+            System.out.println("File not deleted");
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
 
 
 

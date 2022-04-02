@@ -6,6 +6,7 @@ package sql;
 
 import cinema.cinema.AdminFrame;
 import cinema.cinema.ClientFrame;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -294,5 +295,28 @@ public class User extends SQLqry{
         return false;
         
 
+    }
+    
+    public void deleteAccount(String mail)
+    {
+        try
+        {
+            Class.forName(driver);   
+            
+            Connection con = DriverManager.getConnection(url, username, password);
+            String qry = "{CALL Deleteaccount(?)}";
+            CallableStatement st = con.prepareCall(qry);
+            st.setString(1, mail);
+            st.executeQuery();
+            
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 }

@@ -13,6 +13,13 @@ import sql.Ticket;
  */
 public class PaymentFrame extends javax.swing.JFrame {
 
+    
+    static int nbChild ;
+    static int nbRegular ;
+    static int nbSenior;
+    
+    static int willCome;
+    static int totalPrice;
     /**
      * Creates new form PayementFramne
 
@@ -20,10 +27,15 @@ public class PaymentFrame extends javax.swing.JFrame {
     String sessionid;
     BuyTicketFrame frm;
 
-    public PaymentFrame(BuyTicketFrame frm,String sessionid) {
+    public PaymentFrame(BuyTicketFrame frm,String sessionid,int nbChild, int nbRegular, int nbSenior, int willCome, int price) {
         initComponents();
         this.sessionid = sessionid;
         this.frm = frm;
+        this.nbChild = nbChild;
+        this.nbRegular = nbRegular;
+        this.nbSenior = nbSenior;
+        this.willCome = willCome;
+        this.totalPrice = price;
     }
 
     /**
@@ -226,7 +238,7 @@ public class PaymentFrame extends javax.swing.JFrame {
         {
             ConnectedUser.purchaseok = true;
             Ticket ticket = new Ticket();
-            ticket.insert(sessionid, ConnectedUser.userid);
+            ticket.insert(sessionid, ConnectedUser.userid, nbChild, nbRegular, nbSenior, willCome, totalPrice);
             this.dispose();
             frm.dispose();
         }
