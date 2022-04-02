@@ -5,6 +5,7 @@
 package sql;
 
 import cinema.cinema.AdminFrame;
+import cinema.cinema.ClientFrame;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -96,6 +97,8 @@ public class User extends SQLqry{
                 else
                 {
                     System.out.println("Is not employee");
+                    ClientFrame client = new ClientFrame(user_mail);
+                    client.setVisible(true);
                 }
                 
             }           
@@ -226,7 +229,7 @@ public class User extends SQLqry{
             
             while(rs.next())
             {
-                returnValue = rs.getString(2) + " " + rs.getString(3) + " "+ rs.getString(4) + " " +  rs.getString(5) + " " + rs.getString(6) + " "+  rs.getString(7);
+                returnValue = rs.getString(2) + " " + rs.getString(3) + " "+ rs.getString(4) + " " +  rs.getString(5) + " " + rs.getString(6) + " "+  rs.getString(7) + " " + rs.getString(1);
                 
             }
             

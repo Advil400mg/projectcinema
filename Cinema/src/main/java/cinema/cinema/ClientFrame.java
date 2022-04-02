@@ -4,6 +4,9 @@
  */
 package cinema.cinema;
 
+import sql.Film;
+import sql.User;
+
 /**
  *
  * @author 33659
@@ -13,8 +16,21 @@ public class ClientFrame extends javax.swing.JFrame {
     /**
      * Creates new form ClientFrame
      */
-    public ClientFrame() {
+    String mail;
+    String uid;
+    public ClientFrame(String mail) {
         initComponents();
+        User user = new User();
+        this.mail = mail;
+        String userinfo = user.getAll(mail);
+        String[] infos = userinfo.split(" ");
+        uid = infos[6];
+        jLabelName.setText(infos[0]);
+        jLabelSurname.setText(infos[2]);
+        jLabelID.setText(uid);
+        
+        Film film = new Film();
+        film.loadFilmIntoList(jListTicketDetail1);
     }
 
     /**
@@ -144,6 +160,11 @@ public class ClientFrame extends javax.swing.JFrame {
 
         jButtonDisconnect.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jButtonDisconnect.setText("Disconnect");
+        jButtonDisconnect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDisconnectActionPerformed(evt);
+            }
+        });
 
         jButtonTicketDetail.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jButtonTicketDetail.setText("Ticket detail");
@@ -156,6 +177,11 @@ public class ClientFrame extends javax.swing.JFrame {
 
         jButtonMovieDetail.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jButtonMovieDetail.setText("Movie detail");
+        jButtonMovieDetail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMovieDetailActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -216,6 +242,21 @@ public class ClientFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonDisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDisconnectActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButtonDisconnectActionPerformed
+
+    private void jButtonMovieDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMovieDetailActionPerformed
+        // TODO add your handling code here:
+        if(jListTicketDetail1.isSelectionEmpty())
+        {
+            return;
+        }
+        MovieInfoClientFrame frame = new MovieInfoClientFrame(jListTicketDetail1.getSelectedValue());
+        frame.setVisible(true);
+    }//GEN-LAST:event_jButtonMovieDetailActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -4,6 +4,10 @@
  */
 package cinema.cinema;
 
+import java.sql.Date;
+import java.sql.Time;
+import sql.Session;
+
 /**
  *
  * @author 33659
@@ -13,8 +17,10 @@ public class AddSessionFrame extends javax.swing.JFrame {
     /**
      * Creates new form AddSessionFrame
      */
-    public AddSessionFrame() {
+    String uid;
+    public AddSessionFrame(String filmid) {
         initComponents();
+        uid = filmid;
     }
 
     /**
@@ -122,8 +128,18 @@ public class AddSessionFrame extends javax.swing.JFrame {
         jTextFieldDate.setText("____-__-__");
 
         jButtonAdd.setText("Add");
+        jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddActionPerformed(evt);
+            }
+        });
 
         jButtonQuit.setText("Quit");
+        jButtonQuit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonQuitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -193,6 +209,43 @@ public class AddSessionFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonQuitActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButtonQuitActionPerformed
+
+    private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
+        Session session = new Session();
+        
+        Time start = null;
+        Time end = null;
+        Date date = null;
+        
+        
+        try {
+            start = Time.valueOf(jTextFieldStartTime.getText());
+        } catch (Exception e) {
+            start = null;
+        }
+        try {
+            end = Time.valueOf(jTextFieldEndTime.getText());
+        } catch (Exception e) {
+            end = null;
+        }
+        try {
+            date = Date.valueOf(jTextFieldDate.getText());
+        } catch (Exception e) {
+            date = null;
+        }
+        int roomnb = (int)jSpinnerRoom.getValue();
+        
+        if(start != null & end != null & date != null)
+        {
+            session.insert(start, end, date, uid, roomnb);
+            this.dispose();
+        }
+    }//GEN-LAST:event_jButtonAddActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

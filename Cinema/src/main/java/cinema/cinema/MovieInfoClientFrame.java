@@ -4,6 +4,11 @@
  */
 package cinema.cinema;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import sql.Film;
+import sql.Session;
+
 /**
  *
  * @author 33659
@@ -13,8 +18,30 @@ public class MovieInfoClientFrame extends javax.swing.JFrame {
     /**
      * Creates new form MovieInfoClientFrame
      */
-    public MovieInfoClientFrame() {
+    String filmname;
+    String moviepath;
+    public MovieInfoClientFrame(String filmname) {
         initComponents();
+        this.filmname = filmname;
+        Film film = new Film();
+        Session session = new Session();
+        String allvalues = film.getFilm(filmname);
+        String[] values = allvalues.split(" ");
+        jLabelMovieName.setText(filmname);
+        jLabelGenre.setText(values[2]);
+        jLabelDuration.setText(values[3]);
+        session.loadSessionIntoList(jListSession, filmname);
+        
+        moviepath = values[4];
+        
+        try {
+            ImageIcon imIco = new ImageIcon(moviepath);
+            Image imFit = imIco.getImage();
+            Image imgFit = imFit.getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+            jLabel2.setIcon(new ImageIcon(imgFit));
+        } catch (Exception e) {
+        }
+        
     }
 
     /**
@@ -41,7 +68,7 @@ public class MovieInfoClientFrame extends javax.swing.JFrame {
         jButtonQuit = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jPanel4.setBackground(new java.awt.Color(54, 33, 89));
         jPanel4.setForeground(new java.awt.Color(54, 33, 89));
@@ -191,6 +218,7 @@ public class MovieInfoClientFrame extends javax.swing.JFrame {
 
     private void jButtonQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonQuitActionPerformed
         // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_jButtonQuitActionPerformed
 
     private void jButtonBuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuyActionPerformed

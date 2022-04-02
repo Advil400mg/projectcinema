@@ -7,6 +7,7 @@ package cinema.cinema;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import sql.Film;
+import sql.Session;
 
 /**
  *
@@ -22,6 +23,7 @@ public class MovieInfoFrame extends javax.swing.JFrame {
     public MovieInfoFrame(String name) {
         initComponents();
         Film film = new Film();
+        Session session = new Session();
         String allvalues = film.getFilm(name);
         String[] values = allvalues.split(" ");
         uid = values[0];
@@ -37,6 +39,10 @@ public class MovieInfoFrame extends javax.swing.JFrame {
             jLabelImageMovie.setIcon(new ImageIcon(imgFit));
         } catch (Exception e) {
         }
+ 
+        session.loadSessionIntoList(uid, jListInfo);
+        
+        
     }
 
     /**
@@ -160,9 +166,19 @@ public class MovieInfoFrame extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jButton2.setText("Refresh");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jButton3.setText("Add Session");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jButton4.setText("Delete Session");
@@ -242,6 +258,19 @@ public class MovieInfoFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Session session = new Session();
+        session.loadSessionIntoList(uid, jListInfo);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        AddSessionFrame frm = new AddSessionFrame(uid);
+        frm.setVisible(true);
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
 
