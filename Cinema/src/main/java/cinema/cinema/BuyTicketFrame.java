@@ -4,17 +4,54 @@
  */
 package cinema.cinema;
 
+import sql.Prices;
+
 /**
  *
  * @author 33659
  */
+
+
 public class BuyTicketFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form BuyTicketFrame
      */
-    public BuyTicketFrame() {
+    String userid;
+    int totalPrice;
+    int userPrice;
+    
+    int childPrice;
+    int regularPrice;
+    int seniorPrice;
+    int registeredPrice;
+    
+    public BuyTicketFrame(String userid) {
         initComponents();
+        this.userid = userid;
+        Prices pricessql = new Prices();
+        String allprices = pricessql.getAll();
+        System.out.println(allprices);
+        String prices[] = allprices.split(" ");
+        childPrice = Integer.parseInt(prices[0]);
+        regularPrice = Integer.parseInt(prices[1]);
+        seniorPrice = Integer.parseInt(prices[2]);
+        int buff = regularPrice * 95/100;
+        registeredPrice = buff;
+        
+        userPrice = registeredPrice;
+        
+        jLabelPrice.setText(formatEuro(userPrice));
+        jLabelPriceChild.setText(formatEuro(childPrice));
+        jLabelPriceRegular.setText(formatEuro(regularPrice));
+        jLabelPriceSenior.setText(formatEuro(seniorPrice));
+
+        
+    }
+    
+    public static String formatEuro(int value)
+    {
+        return value + " €";
     }
 
     /**
@@ -72,7 +109,7 @@ public class BuyTicketFrame extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jSeparatorCinemaName3, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LabelCinemaName11))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,7 +269,7 @@ public class BuyTicketFrame extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelPriceChild)
                                     .addComponent(jLabelPriceRegular))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 371, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabelPriceSenior)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -241,10 +278,9 @@ public class BuyTicketFrame extends javax.swing.JFrame {
                                 .addComponent(jLabelTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(63, 63, 63))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabelTitleChild3, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+                        .addComponent(jLabelTitleChild3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(280, 280, 280))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonPurchase)
                         .addGap(72, 72, 72)))
                 .addComponent(jLabelImageMovie, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -277,7 +313,7 @@ public class BuyTicketFrame extends javax.swing.JFrame {
                                     .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabelTitleChild2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabelPriceSenior, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 65, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -300,7 +336,7 @@ public class BuyTicketFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))

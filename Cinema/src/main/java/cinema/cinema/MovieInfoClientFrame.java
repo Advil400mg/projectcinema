@@ -20,7 +20,9 @@ public class MovieInfoClientFrame extends javax.swing.JFrame {
      */
     String filmname;
     String moviepath;
-    public MovieInfoClientFrame(String filmname) {
+    String uid;
+    
+    public MovieInfoClientFrame(String filmname, String uid) {
         initComponents();
         this.filmname = filmname;
         Film film = new Film();
@@ -31,6 +33,7 @@ public class MovieInfoClientFrame extends javax.swing.JFrame {
         jLabelGenre.setText(values[2]);
         jLabelDuration.setText(values[3]);
         session.loadSessionIntoList(jListSession, filmname);
+        this.uid = uid;
         
         moviepath = values[4];
         
@@ -223,6 +226,12 @@ public class MovieInfoClientFrame extends javax.swing.JFrame {
 
     private void jButtonBuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuyActionPerformed
         // TODO add your handling code here:
+        if(jListSession.isSelectionEmpty())
+        {
+            return;
+        }
+        BuyTicketFrame frm = new BuyTicketFrame(uid);
+        frm.setVisible(true);
     }//GEN-LAST:event_jButtonBuyActionPerformed
 
     /**

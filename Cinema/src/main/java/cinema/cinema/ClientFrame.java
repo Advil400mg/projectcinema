@@ -254,7 +254,7 @@ public class ClientFrame extends javax.swing.JFrame {
         {
             return;
         }
-        MovieInfoClientFrame frame = new MovieInfoClientFrame(jListTicketDetail1.getSelectedValue());
+        MovieInfoClientFrame frame = new MovieInfoClientFrame(jListTicketDetail1.getSelectedValue(),uid);
         frame.setVisible(true);
     }//GEN-LAST:event_jButtonMovieDetailActionPerformed
 

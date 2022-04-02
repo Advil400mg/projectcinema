@@ -24,7 +24,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jPanel4" min="-2" pref="233" max="-2" attributes="0"/>
+              <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
@@ -58,7 +58,7 @@
                       <Component id="jSeparatorCinemaName3" alignment="1" min="-2" pref="199" max="-2" attributes="0"/>
                       <Component id="LabelCinemaName11" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="28" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -136,7 +136,7 @@
                                       <Component id="jLabelPriceChild" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabelPriceRegular" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace pref="371" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabelPriceSenior" min="-2" max="-2" attributes="0"/>
@@ -149,11 +149,10 @@
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="jLabelTitleChild3" pref="410" max="32767" attributes="0"/>
+                          <Component id="jLabelTitleChild3" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="280" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="jButtonPurchase" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                       </Group>
@@ -193,7 +192,7 @@
                                       <Component id="jLabelTitleChild2" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
                                       <Component id="jLabelPriceSenior" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="18" pref="65" max="32767" attributes="0"/>
+                                  <EmptySpace min="18" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
