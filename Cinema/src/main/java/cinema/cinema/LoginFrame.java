@@ -18,7 +18,6 @@ public class LoginFrame extends javax.swing.JFrame {
     }
     
     
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -93,7 +92,6 @@ public class LoginFrame extends javax.swing.JFrame {
                 jPasswordField1ActionPerformed(evt);
             }
         });
-
         javax.swing.GroupLayout PanelSecondBackgroundLayout = new javax.swing.GroupLayout(PanelSecondBackground);
         PanelSecondBackground.setLayout(PanelSecondBackgroundLayout);
         PanelSecondBackgroundLayout.setHorizontalGroup(
@@ -170,13 +168,15 @@ public class LoginFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelFirstBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(PanelFirstBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 7, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(PanelFirstBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 1, Short.MAX_VALUE))
         );
 
         pack();
@@ -184,6 +184,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
     private void jTextPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextPasswordActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextPasswordActionPerformed
 
     private void jButtonSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSignInActionPerformed
@@ -210,9 +211,6 @@ public class LoginFrame extends javax.swing.JFrame {
                 
     }//GEN-LAST:event_jButtonSignUpActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
