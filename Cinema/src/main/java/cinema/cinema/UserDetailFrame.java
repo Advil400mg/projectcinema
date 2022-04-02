@@ -4,6 +4,7 @@
  */
 package cinema.cinema;
 
+import java.sql.Date;
 import javax.swing.ImageIcon;
 import sql.Ticket;
 import sql.User;
@@ -26,10 +27,15 @@ public class UserDetailFrame extends javax.swing.JFrame {
         String[] values = allvalues.split(" ");
         jLabelName.setText(values[0]);
         jLabelSurname.setText(values[1]);
-        jLabelBirthdate.setText(values[2]);
-        jLabelEmail.setText(values[3]);
+        jLabelBirthdate.setText(values[3]);
+        jLabelEmail.setText(values[2]);
         jLabelPassword.setText(values[4]);
         jLabelisEmployee.setText(values[5]);
+        
+        jTextFieldName.setText(values[0]);
+        jTextFieldSurname.setText(values[1]);
+        jTextFieldBirthDate.setText(values[3]);
+        jPasswordField.setText(values[4]);
         this.mail = mail;
         
         Ticket ticket = new Ticket();
@@ -366,12 +372,17 @@ public class UserDetailFrame extends javax.swing.JFrame {
 
     private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
         // TODO add your handling code here:
+        Date date = Date.valueOf(jTextFieldBirthDate.getText());
+        User user = new User();
+        user.updateAccount(mail, jTextFieldName.getText(), jTextFieldSurname.getText(), date, String.valueOf(jPasswordField.getPassword()));
+        this.dispose();
     }//GEN-LAST:event_jButtonUpdateActionPerformed
 
     private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
         // TODO add your handling code here:
         User user = new User();
         user.deleteAccount(this.mail);
+        this.dispose();
     }//GEN-LAST:event_jButtonDeleteActionPerformed
     protected ImageIcon createImageIcon(String path,
                                                String description) {

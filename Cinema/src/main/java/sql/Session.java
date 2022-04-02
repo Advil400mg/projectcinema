@@ -20,11 +20,22 @@ import javax.swing.DefaultListModel;
  */
 public class Session extends SQLqry{
     
+    /**
+     *
+     */
     public Session()
     {
         super();
     }
     
+    /**
+     *
+     * @param start
+     * @param end
+     * @param date
+     * @param filmid
+     * @param roomnb
+     */
     public void insert(Time start, Time end, Date date, String filmid, int roomnb)
     {
         try
@@ -52,6 +63,11 @@ public class Session extends SQLqry{
         }
     }
     
+    /**
+     *
+     * @param filmid
+     * @param list
+     */
     public void loadSessionIntoList(String filmid, javax.swing.JList<String> list)
     {
         DefaultListModel m = new DefaultListModel();
@@ -85,6 +101,12 @@ public class Session extends SQLqry{
         }
     }
     
+    /**
+     *
+     * @param list
+     * @param allids
+     * @param filmname
+     */
     public void loadSessionIntoList(javax.swing.JList<String> list, ArrayList<String> allids ,String filmname)
     {
         allids.clear();

@@ -277,8 +277,8 @@ public class User extends SQLqry{
         try {
             message.setFrom(new InternetAddress(sender));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(mail_address));
-            message.setSubject("Validation code CineGobelin");
-            message.setText("CineGobelin\n" + "Renseignez ce code dans l'application pour valider votre inscription : " + code);
+            message.setSubject("Validation code Projector by CineGobelin");
+            message.setText("Projector by CineGobelin\n" + "Renseignez ce code dans l'application pour valider votre inscription : " + code);
         } catch (MessagingException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -309,6 +309,36 @@ public class User extends SQLqry{
             st.setString(1, mail);
             st.executeQuery();
             
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void updateAccount(String mail, String name, String surname, Date birthdate, String _password)
+    {
+        try
+        {
+            Class.forName(driver);
+            
+            Connection con = DriverManager.getConnection(url, username, password);
+            String qry = "UPDATE user";
+            qry += " SET name = ?, surname = ?, birthdate = ?, password = ?";
+            qry += " WHERE mail = ?";
+            PreparedStatement st = con.prepareStatement(qry);
+            
+            st.setString(1, name);
+            st.setString(2, surname);
+            st.setDate(3, birthdate);
+            st.setString(4, _password);
+            st.setString(5, mail);
+            
+            st.executeUpdate();        
         }
         catch(SQLException e)
         {
