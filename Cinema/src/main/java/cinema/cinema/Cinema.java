@@ -18,6 +18,10 @@ import javax.mail.MessagingException;
 public class Cinema {
     static User sql = new User();
 
+    /**
+     * open login frame
+     * @param args
+     */
     public static void main(String[] args) {
 
         /*Date date = Date.valueOf("2000-12-15");

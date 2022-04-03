@@ -10,16 +10,19 @@ import sql.Ticket;
 import sql.User;
 
 /**
- *
+ * 
  * @author 33659
  */
 public class ClientFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ClientFrame
-     */
+
     String mail;
     String uid;
+
+    /**
+     * Creates new form ClientFrame
+     * @param mail
+     */
     public ClientFrame(String mail) {
         
         initComponents();

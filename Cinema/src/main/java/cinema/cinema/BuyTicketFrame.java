@@ -4,9 +4,15 @@
  */
 package cinema.cinema;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -21,13 +27,11 @@ import sql.Prices;
 
 public class BuyTicketFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form BuyTicketFrame
-     */
+    
     String sessionid;
     static int totalPrice;
     static int userPrice;
-    
+    Image img;
     static int childPrice;
     static int regularPrice;
     static int seniorPrice;
@@ -43,8 +47,15 @@ public class BuyTicketFrame extends javax.swing.JFrame {
     
     public boolean purchaseOK = false;
     
+    String filmname;
     
-    public BuyTicketFrame(String sessionid, String moviepath) {
+    /**
+     * Creates new form BuyTicketFrame
+     * @param sessionid
+     * @param moviepath
+     * @param filmname
+     */
+    public BuyTicketFrame(String sessionid, String moviepath, String filmname) {
         initComponents();
         this.sessionid = sessionid;
         Prices pricessql = new Prices();
@@ -56,6 +67,8 @@ public class BuyTicketFrame extends javax.swing.JFrame {
         seniorPrice = Integer.parseInt(prices[2]);
         int buff = regularPrice * 95/100;
         registeredPrice = buff;
+        
+        this.filmname = filmname;
         
         userPrice = registeredPrice;
         
@@ -69,7 +82,9 @@ public class BuyTicketFrame extends javax.swing.JFrame {
         try {
             ImageIcon imIco = new ImageIcon(moviepath);
             Image imFit = imIco.getImage();
+            
             Image imgFit = imFit.getScaledInstance(jLabelImageMovie.getWidth(), jLabelImageMovie.getHeight(), Image.SCALE_SMOOTH);
+            this.img = imgFit;
             jLabelImageMovie.setIcon(new ImageIcon(imgFit));
         } catch (Exception e) {
         }
@@ -77,11 +92,19 @@ public class BuyTicketFrame extends javax.swing.JFrame {
         
     }
     
+    /**
+     * return price with €
+     * @param value
+     * @return
+     */
     public static String formatEuro(int value)
     {
         return value + " €";
     }
     
+    /**
+     * update prix total
+     */
     public static void updatePrice()
     {
         totalPrice = nbChild * childPrice + nbRegular * regularPrice + nbSenior * seniorPrice + willCome * userPrice;
@@ -440,7 +463,7 @@ public class BuyTicketFrame extends javax.swing.JFrame {
 
     private void jButtonPurchaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPurchaseActionPerformed
         // TODO add your handling code here:
-        PaymentFrame frame = new PaymentFrame(this,sessionid, nbChild, nbRegular, nbSenior, willCome, totalPrice);
+        PaymentFrame frame = new PaymentFrame(this,sessionid, nbChild, nbRegular, nbSenior, willCome, totalPrice,filmname);
         frame.setVisible(true);
        
         if(purchaseOK)
@@ -448,7 +471,8 @@ public class BuyTicketFrame extends javax.swing.JFrame {
             System.out.println("BUY");
         }
     }//GEN-LAST:event_jButtonPurchaseActionPerformed
-
+    
+    
     /**
      * @param args the command line arguments
      */

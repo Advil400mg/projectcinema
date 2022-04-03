@@ -16,11 +16,18 @@ import java.sql.SQLException;
  */
 public class Prices extends SQLqry{
     
+    /**
+     * constructor
+     */
     public Prices()
     {
         super();
     }
     
+    /**
+     * get all prices
+     * @return
+     */
     public String getAll()
     {
         String returnValue = "";

@@ -6,6 +6,7 @@ package cinema.cinema;
 
 import java.awt.Image;
 import java.io.File;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import sql.Film;
 import sql.Session;
@@ -16,11 +17,15 @@ import sql.Session;
  */
 public class MovieInfoFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MovieInfoFrame
-     */
+
+    ArrayList<String> allids = new ArrayList<>();
     String moviepath;
     String uid;
+
+    /**
+     * Creates new form MovieInfoFrame
+     * @param name
+     */
     public MovieInfoFrame(String name) {
         initComponents();
         Film film = new Film();
@@ -41,7 +46,7 @@ public class MovieInfoFrame extends javax.swing.JFrame {
         } catch (Exception e) {
         }
  
-        session.loadSessionIntoList(uid, jListInfo);
+        session.loadSessionIntoList(uid, allids,jListInfo);
         
         
     }
@@ -183,6 +188,11 @@ public class MovieInfoFrame extends javax.swing.JFrame {
 
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jButton4.setText("Delete Session");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton6.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jButton6.setText("Delete Movie");
@@ -268,7 +278,7 @@ public class MovieInfoFrame extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         Session session = new Session();
-        session.loadSessionIntoList(uid, jListInfo);
+        session.loadSessionIntoList(uid,allids, jListInfo);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -292,6 +302,17 @@ public class MovieInfoFrame extends javax.swing.JFrame {
             System.out.println("File not deleted");
         }
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        if(jListInfo.isSelectionEmpty())
+        {
+            return;
+        }
+        System.out.println(allids.get(jListInfo.getSelectedIndex()));
+        Session session = new Session();
+        session.deleteSession(allids.get(jListInfo.getSelectedIndex()));
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
 

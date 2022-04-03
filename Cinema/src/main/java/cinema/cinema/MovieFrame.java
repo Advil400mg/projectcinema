@@ -25,12 +25,13 @@ import sql.Film;
  */
 public class MovieFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MovieFrame
-     */
+
     
     Image currentImage = null;
     
+    /**
+     *Creates new form MovieFrame
+     */
     public MovieFrame() {
         initComponents();
         Film film = new Film();
@@ -265,6 +266,12 @@ public class MovieFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonRefreshActionPerformed
 
     //https://stackoverflow.com/questions/13605248/java-converting-image-to-bufferedimage
+
+    /**
+     * convert image to buffered image
+     * @param image
+     * @return
+     */
     public static BufferedImage convertToBufferedImage(Image image)
     {
         BufferedImage newImage = new BufferedImage(
@@ -316,6 +323,12 @@ public class MovieFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonLoadImageActionPerformed
     //https://www.baeldung.com/java-check-string-number
+
+    /**
+     * verif if a string is numeric
+     * @param strNum
+     * @return
+     */
     public static boolean isNumeric(String strNum) {
         if (strNum == null) {
             return false;
@@ -348,6 +361,12 @@ public class MovieFrame extends javax.swing.JFrame {
         frm.setVisible(true);
     }//GEN-LAST:event_jButtonMovieInfoActionPerformed
 
+    /**
+     * save image to path
+     * @param imFit
+     * @param name
+     * @return
+     */
     public static String saveImg(Image imFit, String name)
     {
         String path = "src\\main\\java\\cinema\\cinema\\Filmimages\\" +name+ ".png";

@@ -18,10 +18,22 @@ import javax.swing.DefaultListModel;
  * @author Tanguy
  */
 public class Film extends SQLqry{
+
+    /**
+     * creata instance of Film
+     */
     public Film()
     {
         super();
     }
+
+    /**
+     * insert film in database
+     * @param name
+     * @param genre
+     * @param duration
+     * @param imagepath
+     */
     public void insert(String name, String genre, int duration, String imagepath)
     {
         try
@@ -49,6 +61,11 @@ public class Film extends SQLqry{
         }
     }
     
+    /**
+     * get film from filmname
+     * @param name
+     * @return
+     */
     public String getFilm(String name)
     {
         String returnValue = "";
@@ -81,6 +98,10 @@ public class Film extends SQLqry{
         return returnValue;
     }
     
+    /**
+     * load film into a listbox
+     * @param list
+     */
     public void loadFilmIntoList(javax.swing.JList<String> list)
     {
         DefaultListModel m = new DefaultListModel();
@@ -113,6 +134,10 @@ public class Film extends SQLqry{
         }
     }
     
+    /**
+     * delete film from database
+     * @param filmid
+     */
     public void deleteFilm(String filmid)
     {
         try

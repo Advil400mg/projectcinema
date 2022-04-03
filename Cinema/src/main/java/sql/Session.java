@@ -4,6 +4,7 @@
  */
 package sql;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -21,7 +22,7 @@ import javax.swing.DefaultListModel;
 public class Session extends SQLqry{
     
     /**
-     *
+     * constructor
      */
     public Session()
     {
@@ -29,7 +30,7 @@ public class Session extends SQLqry{
     }
     
     /**
-     *
+     * insert session into database
      * @param start
      * @param end
      * @param date
@@ -64,19 +65,21 @@ public class Session extends SQLqry{
     }
     
     /**
-     *
+     * load session of a film into a listbox
      * @param filmid
+     * @param allids
      * @param list
      */
-    public void loadSessionIntoList(String filmid, javax.swing.JList<String> list)
+    public void loadSessionIntoList(String filmid,ArrayList<String> allids, javax.swing.JList<String> list)
     {
         DefaultListModel m = new DefaultListModel();
+        allids.clear();
         try
         {
             Class.forName(driver);   
             
             Connection con = DriverManager.getConnection(url, username, password);
-            String qry = "SELECT date, start, roomnb FROM session WHERE filmid = ?";
+            String qry = "SELECT date, start, roomnb, sessionid FROM session WHERE filmid = ?";
             PreparedStatement st = con.prepareStatement(qry);
             st.setString(1, filmid);
             ResultSet rs = st.executeQuery();
@@ -86,6 +89,7 @@ public class Session extends SQLqry{
             {
                 String info = rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3);
                 m.addElement(info);
+                allids.add(rs.getString(4));
                 
             }
             list.setModel(m);
@@ -102,7 +106,7 @@ public class Session extends SQLqry{
     }
     
     /**
-     *
+     * load session of a film into a listbox
      * @param list
      * @param allids
      * @param filmname
@@ -130,6 +134,33 @@ public class Session extends SQLqry{
                 
             }
             list.setModel(m);
+            
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    /**
+     * delete a session from database
+     * @param sessionid
+     */
+    public void deleteSession(String sessionid)
+    {
+        try
+        {
+            Class.forName(driver);   
+            
+            Connection con = DriverManager.getConnection(url, username, password);
+            String qry = "{CALL Deletesession(?)}";
+            CallableStatement st = con.prepareCall(qry);
+            st.setString(1, sessionid);
+            st.executeQuery();
             
         }
         catch(SQLException e)

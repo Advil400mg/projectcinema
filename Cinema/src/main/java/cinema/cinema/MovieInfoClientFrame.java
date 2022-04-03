@@ -17,14 +17,15 @@ import sql.Session;
  */
 public class MovieInfoClientFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MovieInfoClientFrame
-     */
+    
     String filmname;
     String moviepath;
     String uid;
     ArrayList<String> allids;
-    
+    /**
+     * Creates new form MovieInfoClientFrame
+     * @param filmname
+     */
     public MovieInfoClientFrame(String filmname) {
         initComponents();
         allids = new ArrayList<>();
@@ -236,7 +237,7 @@ public class MovieInfoClientFrame extends javax.swing.JFrame {
         }
 
         String[] info = jListSession.getSelectedValue().split(" ");
-        BuyTicketFrame frm = new BuyTicketFrame(allids.get(jListSession.getSelectedIndex()), moviepath);
+        BuyTicketFrame frm = new BuyTicketFrame(allids.get(jListSession.getSelectedIndex()), moviepath,jLabelMovieName.getText());
         frm.setVisible(true);
     }//GEN-LAST:event_jButtonBuyActionPerformed
 

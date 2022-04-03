@@ -7,6 +7,7 @@ package cinema.cinema;
 import java.sql.Date;
 import javax.swing.ImageIcon;
 import sql.Ticket;
+import sql.TicketRecord;
 import sql.User;
 
 /**
@@ -15,11 +16,12 @@ import sql.User;
  */
 public class UserDetailFrame extends javax.swing.JFrame {
 
-
+    String mail;
     /**
      * Creates new form UserDetailFrame
+     * @param mail
      */
-    String mail;
+    
     public UserDetailFrame(String mail) {
         User user = new User();
         initComponents();
@@ -40,6 +42,8 @@ public class UserDetailFrame extends javax.swing.JFrame {
         
         Ticket ticket = new Ticket();
         ticket.loadTicketIntoList(values[6], jListTickets);
+        TicketRecord ticketrecord = new TicketRecord();
+        ticketrecord.loadTicketIntoList(values[6], jListRecords);
         
     }
 
@@ -304,6 +308,7 @@ public class UserDetailFrame extends javax.swing.JFrame {
         jListTickets.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jScrollPane3.setViewportView(jListTickets);
 
+        jListRecords.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jScrollPane4.setViewportView(jListRecords);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -384,6 +389,14 @@ public class UserDetailFrame extends javax.swing.JFrame {
         user.deleteAccount(this.mail);
         this.dispose();
     }//GEN-LAST:event_jButtonDeleteActionPerformed
+
+    //https://openclassrooms.com/forum/sujet/inserer-une-image-java-87914
+    /**
+     * create imageicon
+     * @param path
+     * @param description
+     * @return
+     */
     protected ImageIcon createImageIcon(String path,
                                                String description) {
                     java.net.URL imgURL = getClass().getResource(path);

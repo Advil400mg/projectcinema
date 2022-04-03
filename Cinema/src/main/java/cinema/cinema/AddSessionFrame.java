@@ -14,10 +14,13 @@ import sql.Session;
  */
 public class AddSessionFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AddSessionFrame
-     */
+
     String uid;
+
+    /**
+     * Constructor
+     * @param filmid
+     */
     public AddSessionFrame(String filmid) {
         initComponents();
         uid = filmid;
