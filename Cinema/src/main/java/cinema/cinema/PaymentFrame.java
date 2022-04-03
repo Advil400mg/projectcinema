@@ -55,15 +55,23 @@ public class PaymentFrame extends javax.swing.JFrame {
     
     static int willCome;
     static int totalPrice;
-    /**
-     * Creates new form PayementFramne
 
-     */
     String sessionid;
     BuyTicketFrame frm;
     String filmname;
     Image img;
 
+    /**
+     * Creates new form PayementFramne
+     * @param frm
+     * @param sessionid
+     * @param nbChild
+     * @param nbRegular
+     * @param nbSenior
+     * @param willCome
+     * @param price
+     * @param filmname
+     */
     public PaymentFrame(BuyTicketFrame frm,String sessionid,int nbChild, int nbRegular, int nbSenior, int willCome, int price, String filmname) {
         initComponents();
         this.sessionid = sessionid;
@@ -387,6 +395,14 @@ public class PaymentFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonPurchaseActionPerformed
 
+    /**
+     * generate a qr code
+     * @param text
+     * @param width
+     * @param height
+     * @param s
+     * @throws Exception
+     */
     public void generateQRCode(String text, int width, int height, String s)
             
             throws Exception {

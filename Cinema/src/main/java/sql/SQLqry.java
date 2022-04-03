@@ -11,12 +11,30 @@ package sql;
  */
 
 public class SQLqry {
+
+    /**
+     *
+     */
     protected String driver;
+
+    /**
+     *
+     */
     protected String url;
+
+    /**
+     *
+     */
     protected String username;
+
+    /**
+     *
+     */
     protected String password;
     
-    
+    /**
+     * constructor
+     */
     public SQLqry()
     {
         driver = "com.mysql.cj.jdbc.Driver";

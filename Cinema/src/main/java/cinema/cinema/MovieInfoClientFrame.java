@@ -17,14 +17,15 @@ import sql.Session;
  */
 public class MovieInfoClientFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MovieInfoClientFrame
-     */
+    
     String filmname;
     String moviepath;
     String uid;
     ArrayList<String> allids;
-    
+    /**
+     * Creates new form MovieInfoClientFrame
+     * @param filmname
+     */
     public MovieInfoClientFrame(String filmname) {
         initComponents();
         allids = new ArrayList<>();

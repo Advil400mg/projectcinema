@@ -16,11 +16,12 @@ import sql.User;
  */
 public class UserDetailFrame extends javax.swing.JFrame {
 
-
+    String mail;
     /**
      * Creates new form UserDetailFrame
+     * @param mail
      */
-    String mail;
+    
     public UserDetailFrame(String mail) {
         User user = new User();
         initComponents();
@@ -388,6 +389,14 @@ public class UserDetailFrame extends javax.swing.JFrame {
         user.deleteAccount(this.mail);
         this.dispose();
     }//GEN-LAST:event_jButtonDeleteActionPerformed
+
+    //https://openclassrooms.com/forum/sujet/inserer-une-image-java-87914
+    /**
+     * create imageicon
+     * @param path
+     * @param description
+     * @return
+     */
     protected ImageIcon createImageIcon(String path,
                                                String description) {
                     java.net.URL imgURL = getClass().getResource(path);

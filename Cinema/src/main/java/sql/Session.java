@@ -22,7 +22,7 @@ import javax.swing.DefaultListModel;
 public class Session extends SQLqry{
     
     /**
-     *
+     * constructor
      */
     public Session()
     {
@@ -30,7 +30,7 @@ public class Session extends SQLqry{
     }
     
     /**
-     *
+     * insert session into database
      * @param start
      * @param end
      * @param date
@@ -65,7 +65,7 @@ public class Session extends SQLqry{
     }
     
     /**
-     *
+     * load session of a film into a listbox
      * @param filmid
      * @param allids
      * @param list
@@ -106,7 +106,7 @@ public class Session extends SQLqry{
     }
     
     /**
-     *
+     * load session of a film into a listbox
      * @param list
      * @param allids
      * @param filmname
@@ -147,7 +147,7 @@ public class Session extends SQLqry{
     }
     
     /**
-     *
+     * delete a session from database
      * @param sessionid
      */
     public void deleteSession(String sessionid)

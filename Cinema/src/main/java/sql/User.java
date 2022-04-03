@@ -34,12 +34,23 @@ import javax.swing.JOptionPane;
  */
 public class User extends SQLqry{
 
-    
+    /**
+     * constructor
+     */
     public User()
     {
         super();
     }
     
+    /**
+     * insert user into database
+     * @param name
+     * @param surname
+     * @param mail
+     * @param dateofbirth
+     * @param user_password
+     * @param isEmployee
+     */
     public void insert(String name, String surname,String mail, Date dateofbirth,String user_password, boolean isEmployee )
     {
         try
@@ -68,6 +79,12 @@ public class User extends SQLqry{
         }
     }
     
+    /**
+     * check if a user can connect
+     * @param user_mail
+     * @param user_password
+     * @return
+     */
     public boolean isConnected(String user_mail, String user_password)
     {
         boolean connected = false;
@@ -115,6 +132,12 @@ public class User extends SQLqry{
         
         return connected;
     }
+
+    /**
+     * check if a user is allready registered
+     * @param user_mail
+     * @return
+     */
     public boolean isRegistered(String user_mail)
     {
         boolean exists = false;
@@ -145,6 +168,10 @@ public class User extends SQLqry{
         return exists;
     }
     
+    /**
+     * load users into a listbox
+     * @param list
+     */
     public void loadUserIntoAdmin(javax.swing.JList<String> list)
     {
         DefaultListModel m = new DefaultListModel();
@@ -177,6 +204,11 @@ public class User extends SQLqry{
         }
     }
     
+    /**
+     * load users into a listbox with filter
+     * @param list
+     * @param text
+     */
     public void loadUserIntoAdminFilter(javax.swing.JList<String> list, String text)
     {
         DefaultListModel m = new DefaultListModel();
@@ -214,6 +246,11 @@ public class User extends SQLqry{
         }
     }
     
+    /**
+     * get all infos of a user from his mais address
+     * @param mail
+     * @return
+     */
     public String getAll(String mail)
     {
         String returnValue = "";
@@ -247,6 +284,12 @@ public class User extends SQLqry{
         return returnValue;
     }
     
+    /**
+     * verify if a mail address exists
+     * @param mail_address
+     * @return
+     * @throws MessagingException
+     */
     public boolean verifyAddress(String mail_address) throws MessagingException
     {
         Properties properties = new Properties();
@@ -297,6 +340,10 @@ public class User extends SQLqry{
 
     }
     
+    /**
+     * delete an account from database
+     * @param mail
+     */
     public void deleteAccount(String mail)
     {
         try
@@ -320,6 +367,14 @@ public class User extends SQLqry{
         }
     }
     
+    /**
+     * update an account informations
+     * @param mail
+     * @param name
+     * @param surname
+     * @param birthdate
+     * @param _password
+     */
     public void updateAccount(String mail, String name, String surname, Date birthdate, String _password)
     {
         try

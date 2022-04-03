@@ -9,12 +9,30 @@ package sql;
  * @author Tanguy
  */
 public class ConnectedUser {
+
+    /**
+     *
+     */
     public static String email;
+
+    /**
+     *
+     */
     public static String surname;
+
+    /**
+     *
+     */
     public static String userid;
+
+    /**
+     *
+     */
     public static Boolean purchaseok = false;
 
-            
+    /**
+     *
+     */
     public static void clear()
     {
         email = "";

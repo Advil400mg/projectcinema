@@ -19,11 +19,24 @@ import javax.swing.DefaultListModel;
  */
 public class Ticket extends SQLqry{
     
+    /**
+     * constructor
+     */
     public Ticket()
     {
         super();
     }
     
+    /**
+     * insert ticket into database
+     * @param sessionid
+     * @param userid
+     * @param nbChild
+     * @param nbRegular
+     * @param nbSenior
+     * @param willCome
+     * @param price
+     */
     public void insert(String sessionid, String userid, int nbChild, int nbRegular, int nbSenior, int willCome, int price)
     {
         try
@@ -54,6 +67,11 @@ public class Ticket extends SQLqry{
         }
     }
     
+    /**
+     * load ticket into a listbox
+     * @param userid
+     * @param list
+     */
     public void loadTicketIntoList(String userid, javax.swing.JList<String> list)
     {
         DefaultListModel m = new DefaultListModel();

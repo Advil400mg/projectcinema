@@ -17,12 +17,15 @@ import sql.Session;
  */
 public class MovieInfoFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MovieInfoFrame
-     */
+
     ArrayList<String> allids = new ArrayList<>();
     String moviepath;
     String uid;
+
+    /**
+     * Creates new form MovieInfoFrame
+     * @param name
+     */
     public MovieInfoFrame(String name) {
         initComponents();
         Film film = new Film();

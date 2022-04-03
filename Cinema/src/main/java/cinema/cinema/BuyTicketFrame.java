@@ -27,9 +27,7 @@ import sql.Prices;
 
 public class BuyTicketFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form BuyTicketFrame
-     */
+    
     String sessionid;
     static int totalPrice;
     static int userPrice;
@@ -51,7 +49,12 @@ public class BuyTicketFrame extends javax.swing.JFrame {
     
     String filmname;
     
-    
+    /**
+     * Creates new form BuyTicketFrame
+     * @param sessionid
+     * @param moviepath
+     * @param filmname
+     */
     public BuyTicketFrame(String sessionid, String moviepath, String filmname) {
         initComponents();
         this.sessionid = sessionid;
@@ -89,11 +92,19 @@ public class BuyTicketFrame extends javax.swing.JFrame {
         
     }
     
+    /**
+     * return price with €
+     * @param value
+     * @return
+     */
     public static String formatEuro(int value)
     {
         return value + " €";
     }
     
+    /**
+     * update prix total
+     */
     public static void updatePrice()
     {
         totalPrice = nbChild * childPrice + nbRegular * regularPrice + nbSenior * seniorPrice + willCome * userPrice;
