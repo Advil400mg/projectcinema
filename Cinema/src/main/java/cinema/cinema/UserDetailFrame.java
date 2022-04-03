@@ -7,6 +7,7 @@ package cinema.cinema;
 import java.sql.Date;
 import javax.swing.ImageIcon;
 import sql.Ticket;
+import sql.TicketRecord;
 import sql.User;
 
 /**
@@ -40,6 +41,8 @@ public class UserDetailFrame extends javax.swing.JFrame {
         
         Ticket ticket = new Ticket();
         ticket.loadTicketIntoList(values[6], jListTickets);
+        TicketRecord ticketrecord = new TicketRecord();
+        ticketrecord.loadTicketIntoList(values[6], jListRecords);
         
     }
 
@@ -304,6 +307,7 @@ public class UserDetailFrame extends javax.swing.JFrame {
         jListTickets.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jScrollPane3.setViewportView(jListTickets);
 
+        jListRecords.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         jScrollPane4.setViewportView(jListRecords);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

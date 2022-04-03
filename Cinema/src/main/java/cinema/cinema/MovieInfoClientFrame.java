@@ -236,7 +236,7 @@ public class MovieInfoClientFrame extends javax.swing.JFrame {
         }
 
         String[] info = jListSession.getSelectedValue().split(" ");
-        BuyTicketFrame frm = new BuyTicketFrame(allids.get(jListSession.getSelectedIndex()), moviepath);
+        BuyTicketFrame frm = new BuyTicketFrame(allids.get(jListSession.getSelectedIndex()), moviepath,jLabelMovieName.getText());
         frm.setVisible(true);
     }//GEN-LAST:event_jButtonBuyActionPerformed
 

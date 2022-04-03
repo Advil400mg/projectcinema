@@ -6,6 +6,7 @@ package cinema.cinema;
 
 import sql.ConnectedUser;
 import sql.Ticket;
+import sql.TicketRecord;
 
 /**
  *
@@ -26,8 +27,9 @@ public class PaymentFrame extends javax.swing.JFrame {
      */
     String sessionid;
     BuyTicketFrame frm;
+    String filmname;
 
-    public PaymentFrame(BuyTicketFrame frm,String sessionid,int nbChild, int nbRegular, int nbSenior, int willCome, int price) {
+    public PaymentFrame(BuyTicketFrame frm,String sessionid,int nbChild, int nbRegular, int nbSenior, int willCome, int price, String filmname) {
         initComponents();
         this.sessionid = sessionid;
         this.frm = frm;
@@ -36,6 +38,7 @@ public class PaymentFrame extends javax.swing.JFrame {
         this.nbSenior = nbSenior;
         this.willCome = willCome;
         this.totalPrice = price;
+        this.filmname = filmname;
     }
 
     /**
@@ -239,6 +242,8 @@ public class PaymentFrame extends javax.swing.JFrame {
             ConnectedUser.purchaseok = true;
             Ticket ticket = new Ticket();
             ticket.insert(sessionid, ConnectedUser.userid, nbChild, nbRegular, nbSenior, willCome, totalPrice);
+            TicketRecord ticketrecord = new TicketRecord();
+            ticketrecord.insert(ConnectedUser.userid, filmname,nbChild+ nbRegular+nbSenior+ willCome,totalPrice );
             this.dispose();
             frm.dispose();
         }

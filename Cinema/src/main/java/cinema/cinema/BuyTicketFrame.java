@@ -43,8 +43,10 @@ public class BuyTicketFrame extends javax.swing.JFrame {
     
     public boolean purchaseOK = false;
     
+    String filmname;
     
-    public BuyTicketFrame(String sessionid, String moviepath) {
+    
+    public BuyTicketFrame(String sessionid, String moviepath, String filmname) {
         initComponents();
         this.sessionid = sessionid;
         Prices pricessql = new Prices();
@@ -56,6 +58,8 @@ public class BuyTicketFrame extends javax.swing.JFrame {
         seniorPrice = Integer.parseInt(prices[2]);
         int buff = regularPrice * 95/100;
         registeredPrice = buff;
+        
+        this.filmname = filmname;
         
         userPrice = registeredPrice;
         
@@ -440,7 +444,7 @@ public class BuyTicketFrame extends javax.swing.JFrame {
 
     private void jButtonPurchaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPurchaseActionPerformed
         // TODO add your handling code here:
-        PaymentFrame frame = new PaymentFrame(this,sessionid, nbChild, nbRegular, nbSenior, willCome, totalPrice);
+        PaymentFrame frame = new PaymentFrame(this,sessionid, nbChild, nbRegular, nbSenior, willCome, totalPrice,filmname);
         frame.setVisible(true);
        
         if(purchaseOK)
