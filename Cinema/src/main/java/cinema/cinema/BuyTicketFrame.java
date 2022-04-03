@@ -4,9 +4,15 @@
  */
 package cinema.cinema;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -27,7 +33,7 @@ public class BuyTicketFrame extends javax.swing.JFrame {
     String sessionid;
     static int totalPrice;
     static int userPrice;
-    
+    Image img;
     static int childPrice;
     static int regularPrice;
     static int seniorPrice;
@@ -73,7 +79,9 @@ public class BuyTicketFrame extends javax.swing.JFrame {
         try {
             ImageIcon imIco = new ImageIcon(moviepath);
             Image imFit = imIco.getImage();
+            
             Image imgFit = imFit.getScaledInstance(jLabelImageMovie.getWidth(), jLabelImageMovie.getHeight(), Image.SCALE_SMOOTH);
+            this.img = imgFit;
             jLabelImageMovie.setIcon(new ImageIcon(imgFit));
         } catch (Exception e) {
         }
@@ -452,7 +460,8 @@ public class BuyTicketFrame extends javax.swing.JFrame {
             System.out.println("BUY");
         }
     }//GEN-LAST:event_jButtonPurchaseActionPerformed
-
+    
+    
     /**
      * @param args the command line arguments
      */

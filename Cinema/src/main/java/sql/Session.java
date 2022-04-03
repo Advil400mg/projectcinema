@@ -67,6 +67,7 @@ public class Session extends SQLqry{
     /**
      *
      * @param filmid
+     * @param allids
      * @param list
      */
     public void loadSessionIntoList(String filmid,ArrayList<String> allids, javax.swing.JList<String> list)
@@ -145,6 +146,10 @@ public class Session extends SQLqry{
         }
     }
     
+    /**
+     *
+     * @param sessionid
+     */
     public void deleteSession(String sessionid)
     {
         try

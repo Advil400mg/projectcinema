@@ -4,9 +4,43 @@
  */
 package cinema.cinema;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.Document;
+//import java.awt.Image;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Desktop;
+import static java.awt.SystemColor.text;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.util.Properties;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.Authenticator;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import sql.ConnectedUser;
 import sql.Ticket;
 import sql.TicketRecord;
+import sql.User;
 
 /**
  *
@@ -28,6 +62,7 @@ public class PaymentFrame extends javax.swing.JFrame {
     String sessionid;
     BuyTicketFrame frm;
     String filmname;
+    Image img;
 
     public PaymentFrame(BuyTicketFrame frm,String sessionid,int nbChild, int nbRegular, int nbSenior, int willCome, int price, String filmname) {
         initComponents();
@@ -237,6 +272,10 @@ public class PaymentFrame extends javax.swing.JFrame {
 
     private void jButtonPurchaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPurchaseActionPerformed
         // TODO add your handling code here:
+        
+        User user = new User();
+        String name = user.getAll(ConnectedUser.email).split(" ")[0];
+        
         if(!jTextFieldName.getText().isEmpty() & !jTextFieldName.getText().isEmpty() & !jTextFieldName2.getText().isEmpty() & !jTextFieldName2.getText().isEmpty())
         {
             ConnectedUser.purchaseok = true;
@@ -244,11 +283,119 @@ public class PaymentFrame extends javax.swing.JFrame {
             ticket.insert(sessionid, ConnectedUser.userid, nbChild, nbRegular, nbSenior, willCome, totalPrice);
             TicketRecord ticketrecord = new TicketRecord();
             ticketrecord.insert(ConnectedUser.userid, filmname,nbChild+ nbRegular+nbSenior+ willCome,totalPrice );
+            String qcip = "src\\main\\java\\cinema\\cinema\\qrcode.png";
+            int nbtotal = nbChild+ nbRegular+nbSenior+ willCome;
+            Document doc = new Document();
+            try {
+                PdfWriter.getInstance(doc, new FileOutputStream("src\\main\\java\\cinema\\cinema\\ticket.pdf") );
+                generateQRCode("/"+filmname+"/"+nbtotal+"/"+totalPrice,1250,1250,qcip);
+                doc.open();
+                Image img2;
+                img2 = Image.getInstance(qcip);
+                img2.scaleToFit(180,476);
+                doc.add(new Paragraph("Projector by CineGobelin"+ "\n\n"));
+                doc.add(new Paragraph("Ticket for " + filmname + "\n\n"));
+                doc.add(img2);
+                doc.add(new Paragraph("\n\n"));
+                if(willCome == 1)
+                {
+                    doc.add(new Paragraph(name +" will come : " + "Yes"));
+                }
+                else
+                {
+                    doc.add(new Paragraph("name will come : " + "No"));
+                }
+                if(nbChild > 0)
+                {
+                    doc.add(new Paragraph("Child : " + nbChild));
+                }
+                if(nbRegular > 0)
+                {
+                    doc.add(new Paragraph("Regular : " + nbRegular));
+                }
+                if(nbSenior > 0)
+                {
+                    doc.add(new Paragraph("Senior : " + nbSenior));
+                }
+                doc.add(new Paragraph("\n\nPrice : " + totalPrice + "€"));
+                doc.close();
+                Desktop.getDesktop().open(new File ("src\\main\\java\\cinema\\cinema\\ticket.pdf"));
+                
+                
+                
+            } catch (Exception ex) {
+                doc.close();
+                Logger.getLogger(PaymentFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            Properties properties = new Properties();
+        Random r = new Random();
+        
+        String code = String.format("%d%d%d%d%d",r.nextInt(10),r.nextInt(10),r.nextInt(10),r.nextInt(10),r.nextInt(10));
+        
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+        properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+        properties.put("mail.smtp.ssl.protocols", "TLSv1.2");
+        
+        String sender = "tanguy.vienot.pers@gmail.com";
+        String sender_password = "lexurxnbmkikslfc";
+        
+        
+        Session session = Session.getInstance(properties, new Authenticator(){
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication()
+            {
+                return new PasswordAuthentication(sender, sender_password);
+            }
+        });
+        
+        Message message = new MimeMessage(session);
+        BodyPart messageBodyPart = new MimeBodyPart(); 
+
+        try {
+            message.setFrom(new InternetAddress(sender));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(ConnectedUser.email));
+            message.setSubject("Ticket Projector by CineGobelin");
+            messageBodyPart.setText("Merci d'avoir choisi Projector by CineGobelin\nVoici votre ticket pour " + filmname);
+            MimeBodyPart attachmentPart = new MimeBodyPart();
+            try {
+                attachmentPart.attachFile(new File("src\\main\\java\\cinema\\cinema\\ticket.pdf"));
+            } catch (IOException ex) {
+                Logger.getLogger(PaymentFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Multipart multipart = new MimeMultipart();
+            multipart.addBodyPart(messageBodyPart);
+            multipart.addBodyPart(attachmentPart);
+            message.setContent(multipart);
+            Transport.send(message);
+        } catch (MessagingException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        System.out.println("Message envoyé");
+
+            
+          
+            
+            
             this.dispose();
             frm.dispose();
         }
     }//GEN-LAST:event_jButtonPurchaseActionPerformed
 
+    public void generateQRCode(String text, int width, int height, String s)
+            
+            throws Exception {
+        //Class.forName("com.google.zxing.qrcode");
+        QRCodeWriter qcwobj = new QRCodeWriter();
+        BitMatrix bmobj = qcwobj.encode(text, BarcodeFormat.QR_CODE, width, height);
+        Path p = FileSystems.getDefault().getPath(s);
+        MatrixToImageWriter.writeToPath(bmobj, "PNG",p);
+    }
     /**
      * @param args the command line arguments
      */
